@@ -796,11 +796,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mikhail\\source\\repos\\SelfGraphics\\SelfGraphics\\SelfGraphics.csproj",
+      "projectUniqueName": "C:\\Users\\Mikhail\\source\\repos\\SelfRender\\SelfGraphics\\SelfGraphics\\SelfGraphics.csproj",
       "projectName": "SelfGraphics",
-      "projectPath": "C:\\Users\\Mikhail\\source\\repos\\SelfGraphics\\SelfGraphics\\SelfGraphics.csproj",
+      "projectPath": "C:\\Users\\Mikhail\\source\\repos\\SelfRender\\SelfGraphics\\SelfGraphics\\SelfGraphics.csproj",
       "packagesPath": "C:\\Users\\Mikhail\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mikhail\\source\\repos\\SelfGraphics\\SelfGraphics\\obj\\",
+      "outputPath": "C:\\Users\\Mikhail\\source\\repos\\SelfRender\\SelfGraphics\\SelfGraphics\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

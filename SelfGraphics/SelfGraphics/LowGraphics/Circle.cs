@@ -54,7 +54,7 @@ namespace SelfGraphics.LowGraphics
             }
             var pre = Tools.DoubleRange(rad + border, rad + border);
             points = (from p in pre
-                     let f = new Point2(p[0], p[1], grid)
+                     let f = center.ChangedFor(p[0], p[1])
                      where rule(f.GetLenTo(center))
                      select f).ToList();
             foreach (var part in points)

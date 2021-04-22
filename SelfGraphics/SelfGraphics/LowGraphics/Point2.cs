@@ -10,6 +10,12 @@ namespace SelfGraphics.LowGraphics
 {
     class Point2
     {
+        public object tag;
+
+        public Point2 ChangedFor(double xVal, double yVal)
+        {
+            return new Point2(X + xVal, Y + yVal, grid) { Len = this.Len };
+        }
         public double Len;
         public Point2 Sub(Point2 p1, Point2 p2) => new Point2(Math.Abs(p1.X - p2.X), Math.Abs(p2.Y - p1.Y), grid);
 

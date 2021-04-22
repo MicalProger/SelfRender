@@ -17,7 +17,7 @@ namespace SelfGraphics
             window.SetActive(true);
             Grid grid = new Grid(1000, 1000, Color.Black);
             Circle circle = new Circle(grid, new Point2(500, 500, grid), 250);
-            circle.SetCircle(2, BorderType.In);
+            circle.SetCircle(10, BorderType.In);
             while (window.IsOpen)
             {
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Q))

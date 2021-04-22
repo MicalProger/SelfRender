@@ -10,6 +10,10 @@ namespace SelfGraphics.LowGraphics
 {
     class Grid
     {
+        public void TransformPos(object tag, Point2 vector)
+        {
+
+        }
         Color color;
         uint w;
         uint h;
