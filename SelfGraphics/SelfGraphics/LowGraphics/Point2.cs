@@ -12,6 +12,11 @@ namespace SelfGraphics.LowGraphics
     {
         public object tag;
 
+        public void ChangeFor(Point2 point)
+        {
+            X += point.X;
+            Y += point.Y;            
+        }
         public Point2 ChangedFor(double xVal, double yVal)
         {
             return new Point2(X + xVal, Y + yVal, grid) { Len = this.Len };

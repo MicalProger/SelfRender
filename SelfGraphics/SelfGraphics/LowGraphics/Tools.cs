@@ -8,6 +8,11 @@ namespace SelfGraphics.LowGraphics
 {
     static class Tools
     {
+
+        public static double ToRads(double angle)
+        {
+            return  (angle * 180) / Math.PI;  
+        }
         public static double AVG(List<double> nums)
         {
             return nums.Select(n => Convert.ToDouble(n)).Sum() / nums.Count;

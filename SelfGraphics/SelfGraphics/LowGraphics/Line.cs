@@ -1,4 +1,5 @@
 ﻿using SFML.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,29 @@ namespace SelfGraphics.LowGraphics
         Grid grid;
         Point2 point1;
         Point2 point2;
+
+        public void CutFromStart(int iter, Color color, double finalLen, int layer = 1)
+        {
+            var f = (from p in GetLine(iter)
+                     where p.GetLenTo(point2) <= finalLen
+                     select p).ToList();
+            foreach (var pint in f)
+            {
+
+                grid.SetPoint(pint, layer);
+            }
+
+        }
+
+        public Line(Point2 start, double length, double direction, Grid grid)
+        {
+            direction /= 180;
+            direction *= Math.PI;
+            this.grid = grid;
+            point1 = start;
+            point2 = start.ChangedFor(Math.Sin(direction) * length, Math.Cos(direction) * length);
+        }
+
         public Line(Point2 s, Point2 e, Grid grid)
         {
             this.grid = grid;
@@ -25,7 +49,7 @@ namespace SelfGraphics.LowGraphics
                 foreach (var points in pairs)
                 {
                     var middle = new Point2(points);
-                    newp.Add(new List<Point2>{points.First(), middle });
+                    newp.Add(new List<Point2> { points.First(), middle });
                     newp.Add(new List<Point2> { points.Last(), middle });
                 }
                 pairs = newp;
@@ -34,11 +58,11 @@ namespace SelfGraphics.LowGraphics
             f.Add(pairs.Last().Last());
             return f;
         }
-        public void SetLine(int iter, Color color)
+        public void SetLine(int iter, Color color, int layer = 1)
         {
             foreach (var item in this.GetLine(iter))
             {
-                grid.SetPoint(item);
+                grid.SetPoint(item, layer);
             }
         }
     }

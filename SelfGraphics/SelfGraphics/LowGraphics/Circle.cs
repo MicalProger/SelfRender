@@ -8,10 +8,17 @@ namespace SelfGraphics.LowGraphics
 {
     class Circle
     {
+
+        
+
+        string currentTag = Guid.NewGuid().ToString();
+
         double diameter;
         Point2 center;
         Grid grid;
         double rad;
+
+
         public Circle(Grid grid, Point2 center, double radius)
         {
             rad = radius;
@@ -20,7 +27,7 @@ namespace SelfGraphics.LowGraphics
             this.grid = grid;
         }
         delegate bool IsCircle(double len);
-        public void SetCircle(double border, BorderType type)
+        public void SetCircle(double border, BorderType type, int layer=1)
         {
             
             IsCircle rule;
@@ -59,7 +66,7 @@ namespace SelfGraphics.LowGraphics
                      select f).ToList();
             foreach (var part in points)
             {
-                grid.SetPoint(part);
+                grid.SetPoint(part, layer);
             }
                      
 
