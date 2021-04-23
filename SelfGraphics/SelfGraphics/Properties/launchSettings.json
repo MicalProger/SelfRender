@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SelfGraphics": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}
