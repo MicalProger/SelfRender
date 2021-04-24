@@ -25,9 +25,11 @@ namespace SelfGraphics
 
         public static double CamAngel
         {
+            
             get => angle;
             set
             {
+              
                 angle = value;
                 cam.SetRoration(angle);
                 cam.Render(rays, MaxLen);
@@ -70,20 +72,22 @@ namespace SelfGraphics
             }
             get => camPos;
         }
+
         static Point2 camPos = new Point2(275, 160);
 
         static void Main(string[] args)
         {
-            window = new RenderWindow(new VideoMode(750, 500), "Window");
+            window = new RenderWindow(new VideoMode(1980, 1080), "Window", Styles.Default);
             window.Closed += (o, args) => { window.Close(); };
+            
             window.SetActive(true);
             window.KeyPressed += KeyHandler;
             Grid mapGrid = new Grid(@"testMap.png", Color.White);
 
-            Grid grid = new Grid(750, 500, Color.White);
-            Rectangle rect = new Rectangle(new Point2(0, 500 / 2), 750, 500 / 2, grid);
+            Grid grid = new Grid(1980, 1080, Color.White);
+            Rectangle rect = new Rectangle(new Point2(0, 1080 / 2), 1980, 1080 / 2, grid);
             rect.SetRect(Color.Green, 0);
-            cam = new Camera(camPos, angle, 120, RenderMode.SingleRender) { grid = mapGrid };
+            cam = new Camera(camPos, angle, 100, RenderMode.SingleRender) { grid = mapGrid };
             Stopwatch time = new Stopwatch();
             cam.Render(rays, MaxLen);
             while (window.IsOpen)
@@ -99,14 +103,13 @@ namespace SelfGraphics
                                   select p);
                 foreach (Point2 epoint in copy)
                 {
-                 
-                    Point2 posit = new Point2(Convert.ToInt32(epoint.tag) * 750 / rays, 500 / 2);
-                    Rectangle imagePart = new Rectangle(posit, GetEven((double)750 / rays), (500 / 2 - PerspectiveHeight(epoint.Len) * 500 / 2), grid);
-                    imagePart.SetFromCenter(posit.ChangedFor(rays / 2, 0).Rounded(), epoint.Color);
+                    var H = (1080 / 2 - PerspectiveHeight(epoint.Len) * 1080 / 2);
+                    Point2 posit = new Point2(Convert.ToInt32(epoint.tag) * 1980 / rays, 1080 / 2);
+                    Rectangle imagePart = new Rectangle(posit, GetEven((double)1980 / rays), H, grid);
+                    imagePart.SetFromCenter(posit.ChangedFor(1980 * 2 / rays , 0).Rounded(), epoint.Color);
                 }
                 grid.ShowToScreen(window);
                 window.Display();
-                time.Stop();
                 window.SetTitle($"FPS {1000 / (double)(time.ElapsedMilliseconds)}");
                 time.Reset();
             }

@@ -43,34 +43,37 @@ namespace SelfGraphics.GraphRT
 
         public static void RenderPoint(object renderData)
         {
-            
+
             var data = renderData as RenderData;
             Ray local = new Ray(RenderData.Position, data.Ang) { grid = RenderData.BaseGrid };
             var endPoint = local.GetEndpoint(RenderData.len, true);
             if (endPoint != null)
             {
                 endPoint.SetLenTo(RenderData.Position);
-                endPoint.tag = data.index;
+                endPoint.tag = data.index - 1;
                 lock (Menenger.Buffer)
                 {
                     Menenger.Buffer.Add(endPoint);
                 }
             }
             Menenger.count--;
-            
+
         }
 
         public void Render(int rayCount, double renderLen)
         {
+
             Menenger.Buffer.Clear();
+            RenderData.AbsAngle = angle;
             RenderData.Position = Position;
             RenderData.BaseGrid = grid;
             RenderData.len = renderLen;
             List<double> angles = new List<double>();
-            var c = 0;
+
             for (double i = -FOW / 2; i < FOW / 2; i += FOW / rayCount)
             {
                 angles.Add(angle + i);
+
             }
             Menenger.todo = RenderPoint;
             foreach (var item in angles)
@@ -99,13 +102,15 @@ namespace SelfGraphics.GraphRT
             var f = Menenger.Buffer.Select(b => b as Point2).ToList();
             Menenger.Buffer.Clear();
             return f;
-            
+
 
         }
     }
 
     class RenderData
     {
+        public static double AbsAngle;
+
         public int index;
 
         static public Point2 Position;
