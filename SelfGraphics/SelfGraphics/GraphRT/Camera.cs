@@ -43,7 +43,6 @@ namespace SelfGraphics.GraphRT
 
         public static void RenderPoint(object renderData)
         {
-            
             var data = renderData as RenderData;
             Ray local = new Ray(RenderData.Position, data.Ang) { grid = RenderData.BaseGrid };
             var endPoint = local.GetEndpoint(RenderData.len, true);
@@ -51,18 +50,18 @@ namespace SelfGraphics.GraphRT
             {
                 endPoint.SetLenTo(RenderData.Position);
                 endPoint.tag = data.index;
-                lock (Menenger.Buffer)
+                lock (Manager.Buffer)
                 {
-                    Menenger.Buffer.Add(endPoint);
+                    Manager.Buffer.Add(endPoint);
                 }
             }
-            Menenger.count--;
+            Manager.count--;
             
         }
 
         public void Render(int rayCount, double renderLen)
         {
-            Menenger.Buffer.Clear();
+            Manager.Buffer.Clear();
             RenderData.Position = Position;
             RenderData.BaseGrid = grid;
             RenderData.len = renderLen;
@@ -72,10 +71,10 @@ namespace SelfGraphics.GraphRT
             {
                 angles.Add(angle + i);
             }
-            Menenger.todo = RenderPoint;
+            Manager.todo = RenderPoint;
             foreach (var item in angles)
             {
-                Menenger.AddThread(new RenderData(item) { index = angles.IndexOf(item) });
+                Manager.AddThread(new RenderData(item) { index = angles.IndexOf(item) });
             }
         }
 
@@ -90,14 +89,14 @@ namespace SelfGraphics.GraphRT
             {
                 angles.Add(angle + i);
             }
-            Menenger.todo = RenderPoint;
+            Manager.todo = RenderPoint;
             foreach (var item in angles)
             {
-                Menenger.AddThread(new RenderData(item) { index = angles.IndexOf(item) });
+                Manager.AddThread(new RenderData(item) { index = angles.IndexOf(item) });
             }
-            while (Menenger.count != 0) continue;
-            var f = Menenger.Buffer.Select(b => b as Point2).ToList();
-            Menenger.Buffer.Clear();
+            while (Manager.count != 0) continue;
+            var f = Manager.Buffer.Select(b => b as Point2).ToList();
+            Manager.Buffer.Clear();
             return f;
             
 

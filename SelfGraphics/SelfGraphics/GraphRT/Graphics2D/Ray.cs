@@ -50,7 +50,6 @@ namespace SelfGraphics.GraphRT.Graphics2D
                 }
                 if (visualize) grid.SetPoint(currentPoint);
             }
-
         }
 
         public void launch(double distance, double step, bool visualize=true )

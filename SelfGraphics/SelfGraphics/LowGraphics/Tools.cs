@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SelfGraphics.LowGraphics
 {
-    static class Menenger
+    static class Manager
     {
 
         public static int count;

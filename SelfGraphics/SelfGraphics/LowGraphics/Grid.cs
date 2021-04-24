@@ -26,22 +26,21 @@ namespace SelfGraphics.LowGraphics
             w = wight;
         }
 
+        public Grid(string path, Color transparent)
+        {
+            Image image = new Image(File.ReadAllBytes(path));
+            h = image.Size.Y;
+            w = image.Size.X;
+            foreach (var item in Tools.DoubleRangePos(h, h))
+            {
+                if (image.GetPixel((uint)item[0], (uint)item[1]) != transparent)
+                    layers[0].Add(new Point2(item[0], item[1]) { Color = image.GetPixel((uint)item[0], (uint)item[1]) });
+            }
+        }
+
         public Point2 GetSamePoint(Point2 pos, int lay = 0)
         {
             return layers[lay].FirstOrDefault(p => p.X == pos.X && p.Y == pos.Y);
-        }
-
-        public Grid(string path, Color transparent)
-        {
-
-            Image cur = new Image(File.ReadAllBytes(path));
-            h = cur.Size.Y;
-            w = cur.Size.X;
-            foreach (var item in Tools.DoubleRangePos(h, h))
-            {
-                if (cur.GetPixel((uint)item[0], (uint)item[1]) != transparent)
-                    layers[0].Add(new Point2(item[0], item[1]) { Color = cur.GetPixel((uint)item[0], (uint)item[1]) });
-            }
         }
 
         public bool IsPoint(Point2 target, int layer = 1)
@@ -91,7 +90,6 @@ namespace SelfGraphics.LowGraphics
                 {
                     try
                     {
-
                         if (point.X > w || point.X < 0) continue;
                         if (point.Y > h || point.Y < 0) continue;
 
@@ -101,7 +99,6 @@ namespace SelfGraphics.LowGraphics
                     {
 
                     }
-
                 }
             }
             Texture texture = new Texture(i);

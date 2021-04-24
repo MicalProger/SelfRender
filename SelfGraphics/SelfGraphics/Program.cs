@@ -19,9 +19,16 @@ namespace SelfGraphics
     {
         static RenderWindow window;
 
-        public const int rays = 100;
+        static Point2 camPos = new Point2(275, 160);
+        private const int RAYS = 100;
+        private const double MaxLen = 1000;
+        private const uint windowWidth = 750;
+        private const uint windowHeight = 500;
+        private static double WindowCenterHeight => windowHeight / 2;
+        private const double fov = 120;
+        private static double angle;
+        private static Grid grid;
 
-        public static double angle;
 
         public static double CamAngel
         {
@@ -30,7 +37,7 @@ namespace SelfGraphics
             {
                 angle = value;
                 cam.SetRoration(angle);
-                cam.Render(rays, MaxLen);
+                cam.Render(RAYS, MaxLen);
             }
         }
         public static double GetEven(double f)
@@ -52,8 +59,6 @@ namespace SelfGraphics
             }
         }
 
-
-        public const double MaxLen = 1000;
         public static double PerspectiveHeight(double x)
         {
             if (x > MaxLen) return 0;
@@ -66,52 +71,54 @@ namespace SelfGraphics
             {
                 camPos = value;
                 cam.Position = value;
-                cam.Render(rays, MaxLen);
+                cam.Render(RAYS, MaxLen);
             }
             get => camPos;
         }
-        static Point2 camPos = new Point2(275, 160);
 
-        static void Main(string[] args)
+        static void Init()
         {
-            window = new RenderWindow(new VideoMode(750, 500), "Window");
+            window = new RenderWindow(new VideoMode(windowWidth, windowHeight), "Window");
             window.Closed += (o, args) => { window.Close(); };
             window.SetActive(true);
             window.KeyPressed += KeyHandler;
-            Grid mapGrid = new Grid(@"testMap.png", Color.White);
 
-            Grid grid = new Grid(750, 500, Color.White);
-            Rectangle rect = new Rectangle(new Point2(0, 500 / 2), 750, 500 / 2, grid);
+            var mapGrid = new Grid(@"testMap.png", Color.White);
+            grid = new Grid(windowWidth, windowHeight, Color.White);
+
+            var vertCenterPoint = new Point2(0, WindowCenterHeight);
+            var rect = new Rectangle(vertCenterPoint, windowWidth, WindowCenterHeight, grid);
             rect.SetRect(Color.Green, 0);
-            cam = new Camera(camPos, angle, 120, RenderMode.SingleRender) { grid = mapGrid };
+            cam = new Camera(camPos, angle, fov, RenderMode.SingleRender) { grid = mapGrid };
+            cam.Render(RAYS, MaxLen);
+        }
+
+        static void Main(string[] args)
+        {
+            Init();
+
             Stopwatch time = new Stopwatch();
-            cam.Render(rays, MaxLen);
             while (window.IsOpen)
             {
                 time.Start();
-                grid.ClearLayer(1);
-                (window as Window).DispatchEvents();
 
-                var copy = new List<Point2>();
-                lock (Menenger.Buffer)
-                    copy.AddRange(from local in Menenger.Buffer
-                                  let p = local as Point2
-                                  select p);
-                foreach (Point2 epoint in copy)
+                grid.ClearLayer(1);
+                window.DispatchEvents();
+
+                for (int i = 0; i < Manager.Buffer.Count; i++)
                 {
-                 
-                    Point2 posit = new Point2(Convert.ToInt32(epoint.tag) * 750 / rays, 500 / 2);
-                    Rectangle imagePart = new Rectangle(posit, GetEven((double)750 / rays), (500 / 2 - PerspectiveHeight(epoint.Len) * 500 / 2), grid);
-                    imagePart.SetFromCenter(posit.ChangedFor(rays / 2, 0).Rounded(), epoint.Color);
+                    Point2 epoint = Manager.Buffer[i] as Point2;
+                    Point2 posit = new Point2(Convert.ToInt32(epoint.tag) * windowWidth / RAYS, WindowCenterHeight);
+                    Rectangle imagePart = new Rectangle(posit, GetEven((double)windowWidth / RAYS), (WindowCenterHeight - PerspectiveHeight(epoint.Len) * WindowCenterHeight), grid);
+                    imagePart.SetFromCenter(posit.ChangedFor(RAYS / 2, 0).Rounded(), epoint.Color);
                 }
                 grid.ShowToScreen(window);
                 window.Display();
-                time.Stop();
                 window.SetTitle($"FPS {1000 / (double)(time.ElapsedMilliseconds)}");
+
                 time.Reset();
             }
         }
-
 
         private static void KeyHandler(object sender, KeyEventArgs e)
         {
@@ -130,17 +137,15 @@ namespace SelfGraphics
             else if (e.Code == Keyboard.Key.D)
             {
                 CamPosit = CamPosit.ChangedFor(50, 0);
-            }else if(e.Code == Keyboard.Key.Q)
+            }
+            else if (e.Code == Keyboard.Key.Q)
             {
                 CamAngel = CamAngel + 15;
             }
-            else if(e.Code == Keyboard.Key.E)
+            else if (e.Code == Keyboard.Key.E)
             {
                 CamAngel = CamAngel - 15;
             }
-
         }
     }
-
 }
-
