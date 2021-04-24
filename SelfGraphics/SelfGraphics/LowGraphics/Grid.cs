@@ -26,6 +26,11 @@ namespace SelfGraphics.LowGraphics
             w = wight;
         }
 
+        public Point2 GetSamePoint(Point2 pos, int lay = 0)
+        {
+            return layers[lay].FirstOrDefault(p => p.X == pos.X && p.Y == pos.Y);
+        }
+
         public Grid(string path, Color transparent)
         {
 
@@ -84,10 +89,18 @@ namespace SelfGraphics.LowGraphics
             {
                 foreach (var point in data)
                 {
-                    if (point.X > w || point.X < 0) point.X = 0;
-                    if (point.Y > h || point.Y < 0) point.Y = 0;
+                    try
+                    {
 
-                    i.SetPixel((uint)point.X, (uint)point.Y, point.Color);
+                        if (point.X > w || point.X < 0) continue;
+                        if (point.Y > h || point.Y < 0) continue;
+
+                        i.SetPixel((uint)point.X, (uint)point.Y, point.Color);
+                    }
+                    catch
+                    {
+
+                    }
 
                 }
             }

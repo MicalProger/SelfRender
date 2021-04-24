@@ -20,7 +20,7 @@ namespace SelfGraphics.LowGraphics
 
         public static void AddThread(object args)
         {
-            while (Environment.ProcessorCount - 2 < count) continue;
+            while (Environment.ProcessorCount - 1 < count) continue;
                 count++;
             new Thread(new ParameterizedThreadStart(todo)).Start(args);
         }

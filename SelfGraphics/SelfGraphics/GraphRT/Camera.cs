@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace SelfGraphics.GraphRT
 {
+
+    enum RenderMode
+    {
+        SingleRender = 1,
+        AlwaysRender = 2
+    }
     class Camera
     {
+        RenderMode options;
 
         public Grid grid;
 
@@ -26,9 +33,9 @@ namespace SelfGraphics.GraphRT
         public void Rotate(double value) => angle += value;
 
 
-        public Camera(Point2 pos, double angle, double FOW)
+        public Camera(Point2 pos, double angle, double FOW, RenderMode mode)
         {
-
+            options = mode;
             this.FOW = FOW;
             Position = pos;
             this.angle = angle;
@@ -36,17 +43,43 @@ namespace SelfGraphics.GraphRT
 
         public static void RenderPoint(object renderData)
         {
+            
             var data = renderData as RenderData;
             Ray local = new Ray(RenderData.Position, data.Ang) { grid = RenderData.BaseGrid };
-            var endPoint = local.GetEndpoint(RenderData.len, false);
-            lock (Menenger.Buffer)
+            var endPoint = local.GetEndpoint(RenderData.len, true);
+            if (endPoint != null)
             {
-                Menenger.Buffer.Add(endPoint);
+                endPoint.SetLenTo(RenderData.Position);
+                endPoint.tag = data.index;
+                lock (Menenger.Buffer)
+                {
+                    Menenger.Buffer.Add(endPoint);
+                }
             }
             Menenger.count--;
+            
         }
 
-        public List<Point2> GetImage2(int count, double len = double.PositiveInfinity)
+        public void Render(int rayCount, double renderLen)
+        {
+            Menenger.Buffer.Clear();
+            RenderData.Position = Position;
+            RenderData.BaseGrid = grid;
+            RenderData.len = renderLen;
+            List<double> angles = new List<double>();
+            var c = 0;
+            for (double i = -FOW / 2; i < FOW / 2; i += FOW / rayCount)
+            {
+                angles.Add(angle + i);
+            }
+            Menenger.todo = RenderPoint;
+            foreach (var item in angles)
+            {
+                Menenger.AddThread(new RenderData(item) { index = angles.IndexOf(item) });
+            }
+        }
+
+        public List<Point2> GetImage2(int count, double len = double.PositiveInfinity, bool stop = false)
         {
             RenderData.Position = Position;
             RenderData.BaseGrid = grid;
@@ -60,18 +93,21 @@ namespace SelfGraphics.GraphRT
             Menenger.todo = RenderPoint;
             foreach (var item in angles)
             {
-                Menenger.AddThread(new RenderData(item));
+                Menenger.AddThread(new RenderData(item) { index = angles.IndexOf(item) });
             }
-            while (Menenger.Buffer.Count != angles.Count) continue;
+            while (Menenger.count != 0) continue;
             var f = Menenger.Buffer.Select(b => b as Point2).ToList();
             Menenger.Buffer.Clear();
             return f;
             
+
         }
     }
 
     class RenderData
     {
+        public int index;
+
         static public Point2 Position;
 
         public double Ang;

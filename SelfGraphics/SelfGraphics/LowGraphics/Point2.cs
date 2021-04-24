@@ -56,9 +56,15 @@ namespace SelfGraphics.LowGraphics
 
         public Point2 ChangedFor(double xVal, double yVal)
         {
-            return new Point2(X + xVal, Y + yVal) { Len = this.Len };
+            return  new Point2(X + xVal, Y + yVal) { Len = this.Len, Color = this.Color };
         }
 
+
+        public Point2 Rounded()
+        {
+            this.Round();
+            return this;
+        }
         public void Round()
         {
             X = Math.Round(X);

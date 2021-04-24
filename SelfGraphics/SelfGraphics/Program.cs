@@ -17,13 +17,28 @@ namespace SelfGraphics
 
     class Program
     {
-
-        static int len = 5;
-        public static Ray ray;
         static RenderWindow window;
+
+        public const int rays = 100;
 
         public static double angle;
 
+        public static double CamAngel
+        {
+            get => angle;
+            set
+            {
+                angle = value;
+                cam.SetRoration(angle);
+                cam.Render(rays, MaxLen);
+            }
+        }
+        public static double GetEven(double f)
+        {
+            f = Math.Round(f);
+            if (f % 2 == 0) return f + 1;
+            return f;
+        }
         public static void DrawRender()
         {
             RenderWindow render = new RenderWindow(new VideoMode(750, 200), "Render");
@@ -37,43 +52,95 @@ namespace SelfGraphics
             }
         }
 
+
+        public const double MaxLen = 1000;
+        public static double PerspectiveHeight(double x)
+        {
+            if (x > MaxLen) return 0;
+            return x / MaxLen;
+        }
+        static Camera cam;
+        private static Point2 CamPosit
+        {
+            set
+            {
+                camPos = value;
+                cam.Position = value;
+                cam.Render(rays, MaxLen);
+            }
+            get => camPos;
+        }
+        static Point2 camPos = new Point2(275, 160);
+
         static void Main(string[] args)
-        {   
-            window = new RenderWindow(new VideoMode(332, 350), "Window");
+        {
+            window = new RenderWindow(new VideoMode(750, 500), "Window");
             window.Closed += (o, args) => { window.Close(); };
-            window.KeyReleased += KeyboardHandler;
             window.SetActive(true);
-            Grid grid = new Grid(@"testMap.png", Color.White);
-            grid.SetColor(new Color(127, 127, 127));
-            Camera cam = new Camera(new Point2(165, 20), angle, 60) {grid = grid };
+            window.KeyPressed += KeyHandler;
+            Grid mapGrid = new Grid(@"testMap.png", Color.White);
+
+            Grid grid = new Grid(750, 500, Color.White);
+            Rectangle rect = new Rectangle(new Point2(0, 500 / 2), 750, 500 / 2, grid);
+            rect.SetRect(Color.Green, 0);
+            cam = new Camera(camPos, angle, 120, RenderMode.SingleRender) { grid = mapGrid };
             Stopwatch time = new Stopwatch();
+            cam.Render(rays, MaxLen);
             while (window.IsOpen)
             {
                 time.Start();
-                (window as Window).DispatchEvents();
                 grid.ClearLayer(1);
-                cam.SetRoration(angle);
-                var x = cam.GetImage2(15, 200);
+                (window as Window).DispatchEvents();
 
+                var copy = new List<Point2>();
+                lock (Menenger.Buffer)
+                    copy.AddRange(from local in Menenger.Buffer
+                                  let p = local as Point2
+                                  select p);
+                foreach (Point2 epoint in copy)
+                {
+                 
+                    Point2 posit = new Point2(Convert.ToInt32(epoint.tag) * 750 / rays, 500 / 2);
+                    Rectangle imagePart = new Rectangle(posit, GetEven((double)750 / rays), (500 / 2 - PerspectiveHeight(epoint.Len) * 500 / 2), grid);
+                    imagePart.SetFromCenter(posit.ChangedFor(rays / 2, 0).Rounded(), epoint.Color);
+                }
                 grid.ShowToScreen(window);
                 window.Display();
                 time.Stop();
-                window.SetTitle($"FPS {1000 / time.ElapsedMilliseconds}");
+                window.SetTitle($"FPS {1000 / (double)(time.ElapsedMilliseconds)}");
                 time.Reset();
             }
         }
 
-        private static void KeyboardHandler(object sender, KeyEventArgs e)
-        {
 
-            if (e.Code == Keyboard.Key.L) angle += 5;
-            if (e.Code == Keyboard.Key.R) angle -= 5;
-        }
-
-        private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        private static void KeyHandler(object sender, KeyEventArgs e)
         {
-            angle += 1;
-            len += 5;
+            if (e.Code == Keyboard.Key.W)
+            {
+                CamPosit = CamPosit.ChangedFor(0, 50);
+            }
+            else if (e.Code == Keyboard.Key.S)
+            {
+                CamPosit = CamPosit.ChangedFor(0, -50);
+            }
+            if (e.Code == Keyboard.Key.A)
+            {
+                CamPosit = CamPosit.ChangedFor(-50, 0);
+            }
+            else if (e.Code == Keyboard.Key.D)
+            {
+                CamPosit = CamPosit.ChangedFor(50, 0);
+            }else if(e.Code == Keyboard.Key.Q)
+            {
+                CamAngel = CamAngel + 15;
+            }
+            else if(e.Code == Keyboard.Key.E)
+            {
+                CamAngel = CamAngel - 15;
+            }
+
         }
     }
+
 }
+

@@ -65,7 +65,7 @@ namespace SelfGraphics.GraphRT.Graphics2D
                 currentPoint.Round();
                 if (grid.IsPoint(currentPoint, 0))
                 {
-                    target = currentPoint;
+                    target = grid.GetSamePoint(currentPoint);
                     break;
                 }
                 if (visualize) grid.SetPoint(currentPoint);
@@ -74,7 +74,7 @@ namespace SelfGraphics.GraphRT.Graphics2D
 
         public Point2 GetEndpoint(double len, bool isDraw = false)
         {
-            launch(len, 0.5, isDraw);
+            launch(len, 1.5, isDraw);
             return this.target;
         }
     }
