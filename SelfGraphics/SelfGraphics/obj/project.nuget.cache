@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WXFWVfA2ECY3xcrYj/os2P6ilZow73n55SpbhegY9/06kXhGWglC2vi+zTpD/UGsluCpe5AdUI7aM2yUtol4/Q==",
+  "dgSpecHash": "NIwOKvuuQN6Xepw04+WRi7TxepqOCJpmrUsofl0dr/uRQFpEwVWp9e6Q3pO73kPSv1m2+Yo54zjLn06+zMl32w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mikhail\\source\\repos\\SelfRender\\SelfGraphics\\SelfGraphics\\SelfGraphics.csproj",
+  "projectFilePath": "C:\\Users\\Mikhail\\RiderProjects\\SelfRender\\SelfGraphics\\SelfGraphics\\SelfGraphics.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mikhail\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
     "C:\\Users\\Mikhail\\.nuget\\packages\\opentk\\4.6.3\\opentk.4.6.3.nupkg.sha512",
