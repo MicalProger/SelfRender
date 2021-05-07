@@ -11,8 +11,11 @@ namespace SelfGraphics.LowGraphics
 {
     class Grid
     {
-        List<List<Point2>> layers = new List<List<Point2>>() { new List<Point2>(), new List<Point2>() };
+        
 
+        List<List<Point2>> layers = new List<List<Point2>>() { new List<Point2>(), new List<Point2>() };
+        public List<Point2> GetLayer(int layer) => layers[layer];
+        
         Color color;
 
         uint w;

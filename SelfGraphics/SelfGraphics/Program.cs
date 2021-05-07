@@ -17,10 +17,10 @@ namespace SelfGraphics
     class Program
     {
         static RenderWindow _window;
-
-        public const int RAYS = 75;
-
-        public static double _angle;
+        
+        const int RAYS = 200;
+        
+        static double _angle;
 
         const double Height = 900;
 
@@ -43,22 +43,8 @@ namespace SelfGraphics
             if (f % 2 == 0) return f + 1;
             return f;
         }
-
-        public static void DrawRender()
-        {
-            RenderWindow render = new RenderWindow(new VideoMode(750, 200), "Render");
-            render.Closed += (o, args) => { _window.Close(); };
-            render.SetActive(true);
-            while (render.IsOpen)
-            {
-                render.DispatchEvents();
-
-                render.Display();
-            }
-        }
-
-
-        public const double MaxLen = 1000;
+        
+        public const double MaxLen = 500;
 
         public static double PerspectiveHeight(double x)
         {
@@ -93,20 +79,21 @@ namespace SelfGraphics
             Grid grid = new Grid((uint) Wight, (uint) Height, Color.White);
             Rectangle rect = new Rectangle(new Point2(0, Height / 2), Wight, Height / 2, grid);
             rect.SetRect(Color.Green, 0);
-            cam = new Camera(camPos, _angle, 100, RenderMode.SingleRender) {grid = mapGrid};
+            cam = new Camera(camPos, _angle, 50, RenderMode.SingleRender) {grid = mapGrid};
             Stopwatch time = new Stopwatch();
             cam.Render(RAYS, MaxLen);
             while (_window.IsOpen)
             {
                 time.Start();
                 grid.ClearLayer(1);
-                (_window as Window).DispatchEvents();
+                _window.DispatchEvents();
 
                 var copy = new List<Point2>();
                 lock (Menenger.Buffer)
                     copy.AddRange(from local in Menenger.Buffer
                         let p = local as Point2
                         select p);
+                Console.WriteLine(copy.Count);
                 foreach (Point2 epoint in copy)
                 {
                     var H = (Height / 2 - PerspectiveHeight(epoint.Len) * Height / 2);

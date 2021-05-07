@@ -55,6 +55,7 @@ namespace SelfGraphics.GraphRT.Graphics2D
 
         public void launch(double distance, double step, bool visualize=true )
         {
+            
             var katet = Tools.ToRads(angle);
             var xLen = Math.Sin(katet);
             var yLen = Math.Cos(katet);
@@ -65,6 +66,7 @@ namespace SelfGraphics.GraphRT.Graphics2D
                 currentPoint.Round();
                 if (grid.IsPoint(currentPoint, 0))
                 {
+                    currentPoint.SetLenTo(RenderData.Position);
                     target = grid.GetSamePoint(currentPoint);
                     break;
                 }

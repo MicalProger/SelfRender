@@ -43,13 +43,14 @@ namespace SelfGraphics.GraphRT
 
         public static void RenderPoint(object renderData)
         {
-
             var data = renderData as RenderData;
-            Ray local = new Ray(RenderData.Position, data.Ang) { grid = RenderData.BaseGrid };
-            var endPoint = local.GetEndpoint(RenderData.len, true);
+            var k = Tools.ToRads(data.Ang);
+            Ray local = new Ray(RenderData.Position, data.Ang) { grid = RenderData.BaseGrid }; //.ChangedFor(Math.Sin(k * (RenderData.MinLen - 2)), Math.Cos(k * (RenderData.MinLen - 2)))
+            var endPoint = local.GetEndpoint(RenderData.len, false);
             if (endPoint != null)
             {
                 endPoint.SetLenTo(RenderData.Position);
+                endPoint.Len += Math.Sin(data.Ang - RenderData.AbsAngle);
                 endPoint.tag = data.index - 1;
                 lock (Menenger.Buffer)
                 {
@@ -62,7 +63,6 @@ namespace SelfGraphics.GraphRT
 
         public void Render(int rayCount, double renderLen)
         {
-
             Menenger.Buffer.Clear();
             RenderData.AbsAngle = angle;
             RenderData.Position = Position;
@@ -73,7 +73,6 @@ namespace SelfGraphics.GraphRT
             for (double i = -FOW / 2; i < FOW / 2; i += FOW / rayCount)
             {
                 angles.Add(angle + i);
-
             }
             Menenger.todo = RenderPoint;
             foreach (var item in angles)
@@ -113,7 +112,7 @@ namespace SelfGraphics.GraphRT
 
         public int index;
 
-        static public Point2 Position;
+        public static Point2 Position;
 
         public double Ang;
 
@@ -123,7 +122,7 @@ namespace SelfGraphics.GraphRT
 
         public RenderData(double aAg)
         {
-            this.Ang = aAg;
+            Ang = aAg;
         }
     }
 

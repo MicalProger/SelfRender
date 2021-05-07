@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SelfGraphics.LowGraphics
 {
-    class Point2
+    class Point2 : Prim
     {
         public object tag;
 
@@ -85,6 +85,16 @@ namespace SelfGraphics.LowGraphics
             else
                 return Len;
 
+        }
+
+        public override ColideState IsContain(Point2 point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Point2> GetPixels()
+        {
+            throw new NotImplementedException();
         }
     }
 }

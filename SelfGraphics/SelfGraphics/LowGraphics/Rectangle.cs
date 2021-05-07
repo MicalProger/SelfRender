@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SelfGraphics.LowGraphics
 {
-    class Rectangle
+    class Rectangle : Prim
     {
         Grid grid;
 
@@ -44,6 +44,16 @@ namespace SelfGraphics.LowGraphics
                     grid.SetPoint(startPos.ChangedFor(i, j), l);
                 }
             }
+        }
+
+        public override ColideState IsContain(Point2 point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Point2> GetPixels()
+        {
+            throw new NotImplementedException();
         }
     }
 }

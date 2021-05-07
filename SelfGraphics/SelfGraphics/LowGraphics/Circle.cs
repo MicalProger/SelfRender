@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SelfGraphics.LowGraphics
 {
-    class Circle
+    class Circle : Prim
     {
         string currentTag = Guid.NewGuid().ToString();
 
@@ -71,6 +71,16 @@ namespace SelfGraphics.LowGraphics
             }
 
 
+        }
+
+        public override ColideState IsContain(Point2 point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Point2> GetPixels()
+        {
+            throw new NotImplementedException();
         }
     }
     enum BorderType
