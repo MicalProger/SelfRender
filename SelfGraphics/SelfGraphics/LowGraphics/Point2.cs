@@ -2,6 +2,7 @@
 using SFML.System;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,13 @@ namespace SelfGraphics.LowGraphics
         public double Y;
 
         public double Len;
+
+        public override bool Equals(object? obj)
+        {
+            var eqPos = obj as Point2;
+            if (eqPos == null) return false;
+            return eqPos.X == X && eqPos.Y == X;
+        }
 
         public override string ToString()
         {
@@ -59,12 +67,12 @@ namespace SelfGraphics.LowGraphics
             return  new Point2(X + xVal, Y + yVal) { Len = this.Len, Color = this.Color };
         }
 
-
         public Point2 Rounded()
         {
             this.Round();
             return this;
         }
+        
         public void Round()
         {
             X = Math.Round(X);

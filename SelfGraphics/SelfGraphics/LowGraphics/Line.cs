@@ -7,9 +7,6 @@ namespace SelfGraphics.LowGraphics
 {
     class Line : Prim
     {
-
-        
-        
         void countPxs()
         {
             Center = new Point2(new List<Point2>() {point1, point2});
@@ -17,6 +14,7 @@ namespace SelfGraphics.LowGraphics
             var k = Tools.ToRads(Ang);
             var xLen = Math.Sin(k);
             var yLen = Math.Cos(k);
+            point1.SetLenTo(point2);
             for (double i = 0; i < point1.Len; i += 1.2)
             {
                 var local = point1.ChangedFor(xLen * i, yLen * i);
@@ -26,31 +24,27 @@ namespace SelfGraphics.LowGraphics
 
             pxs = finalList;
         }
-        
         public double Ang
         {
-            get => Math.Acos(Math.Abs(point1.X - point2.X) / Math.Abs(point1.Y - point2.Y));
+            get => Tools.ToRads(Math.Acos((point1.X - point2.X) / (point1.Y - point2.Y)));
             set => throw new NotImplementedException();
         }
-
-        Grid grid;
+        
         Point2 point1;
         private Point2 point2;
 
-        public Line(Point2 start, double length, double direction, Grid grid)
+        public Line(Point2 start, double length, double direction)
         {
             Ang = direction;
             direction /= 180;
             direction *= Math.PI;
-            this.grid = grid;
             point1 = start;
             point2 = start.ChangedFor(Math.Sin(direction) * length, Math.Cos(direction) * length);
             countPxs();
         }
 
-        public Line(Point2 s, Point2 e, Grid grid)
+        public Line(Point2 s, Point2 e)
         {
-            this.grid = grid;
             point2 = e;
             point1 = s;
             countPxs();
