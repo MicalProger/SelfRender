@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SFML.System;
 
 namespace SelfGraphics.LowGraphics
 {
@@ -11,18 +12,19 @@ namespace SelfGraphics.LowGraphics
     {
         Grid grid;
 
-        Point2 startPos;
+        public Point2 startPos;
 
-        double W;
+        public double W;
 
-        double H;
+        public double H;
+        private Color col;
 
-        public Rectangle(Point2 pos, double wigth, double heigth, Grid grid)
+        public Rectangle(Point2 startPos, Vector2f sides, Color color)
         {
-            this.grid = grid;
-            startPos = pos;
-            W = wigth;
-            H = heigth;
+            this.col = color;
+            this.startPos = startPos;
+            W = startPos.ChangedFor(sides.X, sides.Y).X;
+            H = startPos.ChangedFor(sides.X, sides.Y).Y;
         }
 
 
@@ -34,7 +36,8 @@ namespace SelfGraphics.LowGraphics
                 grid.SetPoint(center.ChangedFor(item[0], item[1]));
             }
         }
-        public void SetRect(Color color, int l=1)
+
+        public void SetRect(Color color, int l = 1)
         {
             startPos.Color = color;
             for (int i = 0; i < W; i++)
@@ -48,12 +51,34 @@ namespace SelfGraphics.LowGraphics
 
         public override ColideState IsContain(Point2 point)
         {
-            throw new NotImplementedException();
+            if (startPos.X <= point.X && startPos.ChangedFor(W, H).X >= point.X)
+            {
+                if (startPos.Y <= point.Y && startPos.ChangedFor(W, H).Y >= point.Y)
+                    return ColideState.ObjColided;
+            }
+
+            return ColideState.NonColided;
         }
 
         public override List<Point2> GetPixels()
         {
-            throw new NotImplementedException();
+            return new List<Point2>();
+        }
+
+        public override void DrawPrim(RenderWindow win)
+        {
+            VertexArray vrerts = new VertexArray(PrimitiveType.Quads);
+            Vertex v = new Vertex();
+            v.Color = col;
+            v.Position = startPos.getVec2f();
+            vrerts.Append(v);
+            v.Position = startPos.ChangedFor(W, 0).getVec2f();
+            vrerts.Append(v);
+            v.Position = startPos.ChangedFor(W, H).getVec2f();
+            vrerts.Append(v);
+            v.Position = startPos.ChangedFor(0, H).getVec2f();
+            vrerts.Append(v);
+            win.Draw(vrerts);
         }
     }
 }

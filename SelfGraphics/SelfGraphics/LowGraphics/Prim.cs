@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SFML.Graphics;
 
 namespace SelfGraphics.LowGraphics
 {
@@ -20,5 +21,7 @@ namespace SelfGraphics.LowGraphics
         public abstract ColideState IsContain(Point2 point);
         
         public abstract List<Point2> GetPixels();
+
+        public abstract void DrawPrim(RenderWindow win);
     }
 }

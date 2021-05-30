@@ -1,27 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "NIwOKvuuQN6Xepw04+WRi7TxepqOCJpmrUsofl0dr/uRQFpEwVWp9e6Q3pO73kPSv1m2+Yo54zjLn06+zMl32w==",
+  "dgSpecHash": "mL6ve6TC/1jaPOg36CdyD+jfsRrSCV5JynBa1eZokYOh9k8COEs9yFXNVXp60XD4iCMXarp/qvi5CAdRIdqF4w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mikhail\\RiderProjects\\SelfRender\\SelfGraphics\\SelfGraphics\\SelfGraphics.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mikhail\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk\\4.6.3\\opentk.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.compute\\4.6.3\\opentk.compute.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.core\\4.6.3\\opentk.core.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.graphics\\4.6.3\\opentk.graphics.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.input\\4.6.3\\opentk.input.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.mathematics\\4.6.3\\opentk.mathematics.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.openal\\4.6.3\\opentk.openal.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.redist.glfw\\3.3.0-pre20200830200122\\opentk.redist.glfw.3.3.0-pre20200830200122.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.windowing.common\\4.6.3\\opentk.windowing.common.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.windowing.desktop\\4.6.3\\opentk.windowing.desktop.4.6.3.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\opentk.windowing.graphicslibraryframework\\4.6.3\\opentk.windowing.graphicslibraryframework.4.6.3.nupkg.sha512",
     "C:\\Users\\Mikhail\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
     "C:\\Users\\Mikhail\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
     "C:\\Users\\Mikhail\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
     "C:\\Users\\Mikhail\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512",
-    "C:\\Users\\Mikhail\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+    "C:\\Users\\Mikhail\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
   ],
   "logs": []
 }

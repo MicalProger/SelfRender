@@ -31,6 +31,22 @@ namespace SelfGraphics.LowGraphics
     static class Tools
     {
 
+        public static double GetAngle(Point2 p1, Point2 p2)
+        {
+            var xD = (p1.X - p2.X);
+            var yD = (p1.Y - p2.Y);
+            var k = xD / yD;
+            var rAngle = Math.Atan(k);
+            return FromRads(rAngle);
+        }
+        public static double FromRads(double radians)
+        {
+            var pre = radians;
+            pre *= 180;
+            pre /= Math.PI;
+            return pre;
+        }
+        
         public static double ToRads(double angle)
         {
             var pre = angle;

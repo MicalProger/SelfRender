@@ -1,11 +1,8 @@
 ﻿using SFML.Graphics;
-using SFML.System;
-using System;
+using System.Text.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SelfGraphics.LowGraphics
 {
@@ -29,37 +26,24 @@ namespace SelfGraphics.LowGraphics
 
         public Grid LoadGrid(string filePath)
         {
-            StreamReader sr = new StreamReader(filePath);
-            List<string> props = sr.ReadLine()?.Split(':').ToList();
-            Grid local = new Grid(Convert.ToUInt32(props[0]), Convert.ToUInt32(props[1]),
-                new Color(Convert.ToByte(props[2]),
-                    Convert.ToByte(props[3]), Convert.ToByte(props[4])));
-            foreach (var o in File.ReadAllLines(filePath))
-            {
-                var prms = o.Split('-');
-                switch (prms[0])
-                {
-                    case "Line":
-                        var linePr = prms[1].Split(':').ToList();
+            return JsonSerializer.Deserialize<Grid>(File.ReadAllText(filePath));
 
-                        break;
-                    case "Rect":
-                        break;
-                    case "Circle":
-                        break;
-                    case "Point":
-                        break;
-                    default:
-                        break;
-                }
-            }
+        }
 
-            return local;
+        public void SetBorder(Color color)
+        {
+            Line l1 = new Line(new(1, 1), new(1, h - 1), color);
+            Line l2 = new Line(new(1, 1), new(w - 1, 1), color);
+            Line l3 = new Line(new(w - 1, 1), new(w - 1, h - 1), color);
+            Line l4 = new Line(new(1, h - 1 ), new(w - 1, h - 1), color);
+            layers[0].AddRange(new List<Prim>(){l1, l2, l3, l4});
+
         }
 
         public Point2 GetSamePoint(Point2 pos, int lay = 0)
         {
-            return layers[lay].FirstOrDefault(pr => pr.GetPixels().Any(p => p.Equals(pos)))?.GetPixels().First(p => p.Equals(pos));
+            return layers[lay].FirstOrDefault(pr => pr.GetPixels().Any(p => p.Equals(pos)))?.GetPixels()
+                .First(p => p.Equals(pos));
         }
 
         public Grid(string path, Color transparent)
@@ -73,7 +57,7 @@ namespace SelfGraphics.LowGraphics
                     layers[0].Add(new Point2(item[0], item[1]) {Color = cur.GetPixel((uint) item[0], (uint) item[1])});
             }
         }
-        
+
         public void Clear()
         {
             layers = new List<List<Prim>>() {new List<Prim>(), new List<Prim>()};
@@ -103,27 +87,12 @@ namespace SelfGraphics.LowGraphics
             {
                 foreach (var data in prims)
                 {
-                    foreach (var point in data.GetPixels())
-                    {
-                        try
-                        {
-                            if (point.X > w || point.X < 0) continue;
-                            if (point.Y > h || point.Y < 0) continue;
-
-                            i.SetPixel((uint) point.X, (uint) point.Y, point.Color);
-                        }
-                        catch
-                        {
-                            Console.WriteLine(point.ToString());
-                        }
-                    }
+                    data.DrawPrim(window);
                 }
             }
-            Texture texture = new Texture(i);
-            window.Draw(new Sprite(texture));
         }
 
-        public void AddPrim(Prim obj, int lay=1)
+        public void AddPrim(Prim obj, int lay = 1)
         {
             layers[lay].Add(obj);
         }

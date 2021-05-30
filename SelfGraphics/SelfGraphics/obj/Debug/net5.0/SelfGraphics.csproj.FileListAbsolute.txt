@@ -191,15 +191,6 @@ C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\ne
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SelfGraphics.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\ref\SelfGraphics.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SelfGraphics.pdb
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.Compute.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.Core.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.Graphics.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.Input.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.Mathematics.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.OpenAL.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.Windowing.Common.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.Windowing.Desktop.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\OpenTK.Windowing.GraphicsLibraryFramework.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SFML.Audio.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SFML.Graphics.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SFML.System.dll
@@ -262,10 +253,6 @@ C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\ne
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\win-x86\native\csfml-System.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\win-x86\native\csfml-Window.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\win-x86\native\openal32.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\linux-x64\native\libglfw.so.3.3
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\osx-x64\native\libglfw.3.dylib
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\win-x64\native\glfw3.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\win-x86\native\glfw3.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.csprojAssemblyReference.cache
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.AssemblyInfoInputs.cache

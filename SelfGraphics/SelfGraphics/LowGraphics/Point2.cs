@@ -104,5 +104,15 @@ namespace SelfGraphics.LowGraphics
         {
             throw new NotImplementedException();
         }
+
+        public override void DrawPrim(RenderWindow win)
+        {
+            win.Draw(new Vertex[1]{new Vertex(new((float) X, (float) Y))}, PrimitiveType.Points);
+        }
+
+        public Vector2f getVec2f()
+        {
+            return new Vector2f((float) X, (float) Y);
+        }
     }
 }

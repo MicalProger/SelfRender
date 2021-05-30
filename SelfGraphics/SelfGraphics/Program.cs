@@ -1,16 +1,8 @@
-﻿using System;
-using SFML.Graphics;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
+﻿using SFML.Graphics;
 using SFML.Window;
 using SelfGraphics.LowGraphics;
-using System.Timers;
+using System.Text.Json;
 using System.Diagnostics;
-using System.Collections.Generic;
-using SelfGraphics.GraphRT.Graphics2D;
-using System.Linq;
-using SelfGraphics.GraphRT;
-using System.Threading;
 
 namespace SelfGraphics
 {
@@ -20,7 +12,7 @@ namespace SelfGraphics
 
         const double Height = 900;
 
-        const double Wight = 1500;
+        const double Wight = 1600;
 
         static void Main(string[] args)
         {
@@ -29,17 +21,19 @@ namespace SelfGraphics
             _window.SetActive(true);
             _window.KeyPressed += KeyHandler;
             Grid grid = new Grid((uint) Wight, (uint) Height, Color.Black);
-            var line = new Line(new Point2(0, 0), new Point2(20, 20));
-            grid.AddPrim(line);
+            grid.SetBorder(Color.White);
+            var rg = new Rectangle(new Point2(250, 250), new (55, 55), Color.Green);
+            var rr = new Rectangle(new Point2(250, 250), new (55, 55), Color.Red);
+            rr.startPos.X = 700;
+
+            grid.AddPrim(rg);
+            grid.AddPrim(rr);
             Stopwatch time = new Stopwatch();
             while (_window.IsOpen)
             {
                 time.Start();
-                // grid.ClearLayer(1);
+                _window.Clear(Color.Black);
                 _window.DispatchEvents();
-                
-                
-                
                 grid.ShowToScreen(_window);
                 _window.Display();
                 _window.SetTitle($"FPS {1000 / (double) (time.ElapsedMilliseconds)}");
