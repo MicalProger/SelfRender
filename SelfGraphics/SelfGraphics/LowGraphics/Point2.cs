@@ -6,11 +6,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SelfGraphics.GraphRT.Graphics2D;
 
 namespace SelfGraphics.LowGraphics
 {
     class Point2 : Prim
     {
+        public static Point2 Zero = new Point2(0, 0);
+        
         public object tag;
 
         public Color Color = Color.White;
@@ -51,6 +54,11 @@ namespace SelfGraphics.LowGraphics
             Y = y;
         }
 
+        public static Point2 operator +(Point2 p1, Point2 p2)
+        {
+            return new Point2(p1.X + p2.X, p1.Y + p2.Y);
+        }
+        
         public Point2 Copy()
         {
             return new Point2(X, Y) {Len = this.Len };
@@ -95,9 +103,13 @@ namespace SelfGraphics.LowGraphics
 
         }
 
-        public override ColideState IsContain(Point2 point)
+        public override Point2 GetCollision(Ray ray)
         {
-            throw new NotImplementedException();
+            var dir = Tools.ToRads(ray.angle);
+            SetLenTo(ray.Source);
+            if (ray.Source + new Point2(Math.Sin(dir) * Len, Math.Cos(dir) * Len) == this) return this;
+            return null;
+
         }
 
         public override List<Point2> GetPixels()

@@ -46,7 +46,7 @@ namespace SelfGraphics.GraphRT
             var data = renderData as RenderData;
             var k = Tools.ToRads(data.Ang);
             Ray local = new Ray(RenderData.Position, data.Ang) { grid = RenderData.BaseGrid }; //.ChangedFor(Math.Sin(k * (RenderData.MinLen - 2)), Math.Cos(k * (RenderData.MinLen - 2)))
-            var endPoint = local.GetEndpoint(RenderData.len, false);
+            var endPoint = local.GetEndpoint();
             if (endPoint != null)
             {
                 endPoint.SetLenTo(RenderData.Position);

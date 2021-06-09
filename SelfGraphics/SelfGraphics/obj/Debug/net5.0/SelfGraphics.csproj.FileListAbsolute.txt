@@ -253,7 +253,6 @@ C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\ne
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\win-x86\native\csfml-System.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\win-x86\native\csfml-Window.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\runtimes\win-x86\native\openal32.dll
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.csprojAssemblyReference.cache
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.AssemblyInfoInputs.cache
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.AssemblyInfo.cs
@@ -263,3 +262,4 @@ C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\ne
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\ref\SelfGraphics.dll
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.pdb
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.genruntimeconfig.cache
+C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.csproj.AssemblyReference.cache

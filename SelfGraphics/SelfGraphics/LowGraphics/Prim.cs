@@ -1,15 +1,9 @@
 using System.Collections.Generic;
+using SelfGraphics.GraphRT.Graphics2D;
 using SFML.Graphics;
 
 namespace SelfGraphics.LowGraphics
 {
-
-    enum ColideState
-    {
-        ObjColided = 1,
-        HitboxColoided = 2,
-        NonColided = 3
-    }
     abstract class Prim
     {
         public Point2 Center;
@@ -18,7 +12,7 @@ namespace SelfGraphics.LowGraphics
         
         public object tag;
 
-        public abstract ColideState IsContain(Point2 point);
+        public abstract Point2 GetCollision(Ray ray);
         
         public abstract List<Point2> GetPixels();
 

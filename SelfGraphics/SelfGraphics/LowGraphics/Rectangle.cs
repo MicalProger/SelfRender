@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SelfGraphics.GraphRT.Graphics2D;
 using SFML.System;
 
 namespace SelfGraphics.LowGraphics
@@ -49,16 +50,22 @@ namespace SelfGraphics.LowGraphics
             }
         }
 
-        public override ColideState IsContain(Point2 point)
+        public override Point2 GetCollision(Ray ray)
         {
-            if (startPos.X <= point.X && startPos.ChangedFor(W, H).X >= point.X)
-            {
-                if (startPos.Y <= point.Y && startPos.ChangedFor(W, H).Y >= point.Y)
-                    return ColideState.ObjColided;
-            }
-
-            return ColideState.NonColided;
+            Point2 fin = null;
+            List<Line> sides = new List<Line>();
+            sides.Add(new Line(startPos, startPos + new Point2(W, 0), col));
+            sides.Add(new Line(startPos, startPos + new Point2(0, H), col));
+            sides.Add(new Line(startPos + new Point2(W, 0), startPos + new Point2(0, H), col));
+            sides.Add(new Line(startPos + new Point2(0, H), startPos + new Point2(W, 0), col));
+            var tmpPixels = (from line in sides
+                select line.GetCollision(ray)).Where(l => l != null).ToList();
+            if (tmpPixels.Count == 0) return null;
+            tmpPixels.ForEach(p => p.SetLenTo(ray.Source));
+            tmpPixels = tmpPixels.OrderBy(i => i.Len).ToList();
+            return tmpPixels.First();
         }
+   
 
         public override List<Point2> GetPixels()
         {

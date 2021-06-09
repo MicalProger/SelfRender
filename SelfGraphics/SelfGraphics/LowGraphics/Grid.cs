@@ -36,7 +36,7 @@ namespace SelfGraphics.LowGraphics
             Line l2 = new Line(new(1, 1), new(w - 1, 1), color);
             Line l3 = new Line(new(w - 1, 1), new(w - 1, h - 1), color);
             Line l4 = new Line(new(1, h - 1 ), new(w - 1, h - 1), color);
-            layers[0].AddRange(new List<Prim>(){l1, l2, l3, l4});
+            layers[1].AddRange(new List<Prim>(){l1, l2, l3, l4});
 
         }
 

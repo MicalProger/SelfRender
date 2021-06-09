@@ -1,4 +1,4 @@
-﻿﻿using SelfGraphics.LowGraphics;
+﻿using SelfGraphics.LowGraphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace SelfGraphics.GraphRT.Graphics2D
     {
         public Point2 target;
 
-        Point2 source;
+        public Point2 Source;
 
         public double angle;
 
@@ -19,9 +19,8 @@ namespace SelfGraphics.GraphRT.Graphics2D
 
         public Ray(Point2 start, Point2 dirction)
         {
-            source = start;
+            Source = start;
             angle = Math.Atan(dirction.Y / dirction.X) / Math.PI * 180;
-
         }
 
         public Ray(Grid grid)
@@ -31,40 +30,46 @@ namespace SelfGraphics.GraphRT.Graphics2D
 
         public Ray(Point2 start, double angle)
         {
-            source = start;
+            Source = start;
             this.angle = angle;
         }
 
         public void Launch(bool visualize)
         {
-            var katet = Tools.ToRads(angle);
-            var currentPoint = source.Copy();
-            for (double i = 0; i < double.PositiveInfinity; i += 0.5)
-            {
-                currentPoint = source.ChangedFor(Math.Sin(katet) * i, Math.Cos(katet) * i);
-                currentPoint.Round();
-                if (grid.IsPoint(currentPoint, 0))
-                {
-                    target = currentPoint;
-                    break;
-                }
-                if (visualize) grid.SetPoint(currentPoint);
-            }
-
+            // var katet = Tools.ToRads(angle);
+            // var currentPoint = Source.Copy();
+            // for (double i = 0; i < double.PositiveInfinity; i += 0.5)
+            // {
+            //     currentPoint = Source.ChangedFor(Math.Sin(katet) * i, Math.Cos(katet) * i);
+            //     currentPoint.Round();
+            //     if (grid.IsPoint(currentPoint, 0))
+            //     {
+            //         target = currentPoint;
+            //         break;
+            //     }
+            //     if (visualize) grid.SetPoint(currentPoint);
         }
 
-        public void launch(double distance, double step, bool visualize=true )
+        public Point2 GetEndpoint()
         {
-            foreach (var prm in grid.GetLayer(1))
-            {
-                
-            }
+            Launch();
+            return target;
         }
 
-        public Point2 GetEndpoint(double len, bool isDraw = false)
+        public Point2 GetPixelByLen(double len)
         {
-            launch(len, 1.5, isDraw);
-            return this.target;
+            double s, c = 0;
+            s = Math.Sin(Tools.ToRads(angle));
+            c = Math.Cos(Tools.ToRads(angle));
+            return Source + new Point2(s * len, c * len);
+        }
+
+        public void Launch()
+        {
+            List<Point2> cols = grid.GetLayer(1).Select(p => p.GetCollision(this)).Where(p => p != null).ToList();
+            Console.WriteLine(cols.Count);
+            cols.ForEach(p => Console.WriteLine(Tools.GetAngle(p, Source)));
+            target = cols.Count == 0 ? Point2.Zero : cols.OrderBy(p => p.GetLenTo(Source)).First();
         }
     }
 }
