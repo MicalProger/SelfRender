@@ -49,7 +49,9 @@ namespace SelfGraphics
                 time.Start();
                 _window.Clear(Color.Black);
                 _window.DispatchEvents();
+                cam.Angle = ang;
                 cam.RenderGrid(35, true);
+                Console.WriteLine($"{cam.Angle} : {ang}");
                 mapGrid.ShowToScreen(_window);
                 _window.Display();
                 _window.SetTitle($"FPS {1000 / (double)(time.ElapsedMilliseconds)}");

@@ -37,7 +37,7 @@ namespace SelfGraphics.GraphRT
             {
                 foreach (var point in renders)
                 {
-                    ImageGrid.AddPrim(new Line(Position, point, Color.Yellow));
+                    ImageGrid.AddPrim(new Line(Position, point, Color.Yellow), 2);
                 }
             }
             return renders;
