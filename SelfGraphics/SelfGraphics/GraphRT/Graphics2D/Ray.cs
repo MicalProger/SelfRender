@@ -73,14 +73,19 @@ namespace SelfGraphics.GraphRT.Graphics2D
             double s, c = 0;
             s = Math.Sin(Tools.ToRads(angle));
             c = Math.Cos(Tools.ToRads(angle));
-            return Source + new Point2(s * -len, c * -len);
+            return Source + new Point2(s * len, c * len);
         }
 
         public List<Point2> Launch()
         {
             List<Point2> cols = grid.GetLayer(1).Select(p => p.GetCollision(this)).Where(p => p != null).ToList();
-            cols = cols.Where(p => GetPixelByLen(p.GetLenTo(Source)).Rounded().Equals( p.Rounded())).ToList();
-            target = cols.Count == 0 ? Point2.Zero : cols.OrderBy(p => p.GetLenTo(Source)).First();
+            Console.WriteLine(cols.Count);
+            //cols.ForEach(p => Console.WriteLine(Tools.GetAngle(p, Source)));
+            target = cols.Count == 0 ? null : cols.OrderBy(p => p.GetLenTo(Source)).First();
+            if(target == null)
+            {
+
+            }
             return cols;
             Console.WriteLine(target.tag);
         }

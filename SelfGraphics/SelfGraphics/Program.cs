@@ -30,7 +30,7 @@ namespace SelfGraphics
             _window.Resized += (o, args) => { _window.Size = new Vector2u((uint)Wight, (uint)Height); };
             _window.KeyPressed += KeyHandler;
             grid = new Grid((uint)Wight, (uint)Height, Color.Black);
-            grid.SetBorder(Color.Red);
+            //grid.SetBorder(Color.Red);
             var rg = new Rectangle(new Point2(250, 250), new(55, 55), Color.Red) { tag = "Rg" };
             var rr = new Rectangle(new Point2(250, 250), new(55, 55), Color.Green) { tag = "Rr" };
 
