@@ -30,21 +30,10 @@ namespace SelfGraphics
             _window.Resized += (o, args) => { _window.Size = new Vector2u((uint)Wight, (uint)Height); };
             _window.KeyPressed += KeyHandler;
             grid = new Grid((uint)Wight, (uint)Height, Color.Black);
-            //grid.SetBorder(Color.Red);
+            grid.SetBorder(Color.Red);
             var rg = new Rectangle(new Point2(250, 250), new(55, 55), Color.Red) { tag = "Rg" };
             var rr = new Rectangle(new Point2(250, 250), new(55, 55), Color.Green) { tag = "Rr" };
 
-            var l1 = new Line(new Point2(Wight - 1, 0), new Point2(Wight - 1, Height - 1), Color.White);
-            grid.AddPrim(l1);
-
-            var l2 = new Line(new Point2(1, 1), new Point2(Wight - 1, 1), Color.White);
-            grid.AddPrim(l2);
-
-            //var l3 = new Line(new Point2(1, Height - 1), new Point2(Wight - 1, Height - 1), Color.White);
-            //grid.AddPrim(l3);
-
-            var l4 = new Line(new Point2(1, 1), new Point2(0, Height - 1), Color.White);
-            grid.AddPrim(l4);
 
             rr.startPos.X = 700;
             grid.AddPrim(rg);
