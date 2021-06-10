@@ -70,9 +70,11 @@ namespace SelfGraphics.LowGraphics
                 upper = (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4);
                 final.Y = (double) (upper / lower);
                 final.Color = this.col;
+                final.tag = "Pnt pr:{" + tag + "}";
                 List<double> xs = new List<double>() {point1.X, point2.X};
                 List<double> ys = new List<double>() {point1.Y, point2.Y};
-                return final;
+                if (final.X >= xs.Min() && final.X <= xs.Max() && final.Y >= ys.Min() && final.Y <= ys.Max()) return final;
+                return null;
             }
             catch (Exception e)
             {

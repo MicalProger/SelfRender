@@ -68,8 +68,9 @@ namespace SelfGraphics.GraphRT.Graphics2D
         {
             List<Point2> cols = grid.GetLayer(1).Select(p => p.GetCollision(this)).Where(p => p != null).ToList();
             Console.WriteLine(cols.Count);
-            cols.ForEach(p => Console.WriteLine(Tools.GetAngle(p, Source)));
+            //cols.ForEach(p => Console.WriteLine(Tools.GetAngle(p, Source)));
             target = cols.Count == 0 ? Point2.Zero : cols.OrderBy(p => p.GetLenTo(Source)).First();
+            Console.WriteLine(target.tag);
         }
     }
 }
