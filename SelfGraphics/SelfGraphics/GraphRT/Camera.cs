@@ -61,13 +61,12 @@ namespace SelfGraphics.GraphRT
 
         }
 
-        public void Render(int rayCount, double renderLen)
+        public void Render(int rayCount)
         {
             Menenger.Buffer.Clear();
             RenderData.AbsAngle = angle;
             RenderData.Position = Position;
             RenderData.BaseGrid = grid;
-            RenderData.len = renderLen;
             List<double> angles = new List<double>();
 
             for (double i = -FOW / 2; i < FOW / 2; i += FOW / rayCount)
@@ -81,11 +80,10 @@ namespace SelfGraphics.GraphRT
             }
         }
 
-        public List<Point2> GetImage2(int count, double len = double.PositiveInfinity, bool stop = false)
+        public List<Point2> GetImage2(int count)
         {
             RenderData.Position = Position;
             RenderData.BaseGrid = grid;
-            RenderData.len = len;
             List<double> angles = new List<double>();
             var c = 0;
             for (double i = -FOW / 2; i < FOW / 2; i += FOW / count)
@@ -117,9 +115,7 @@ namespace SelfGraphics.GraphRT
         public double Ang;
 
         public static Grid BaseGrid;
-
-        public static double len;
-
+        
         public RenderData(double aAg)
         {
             Ang = aAg;

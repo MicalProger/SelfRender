@@ -28,7 +28,7 @@ namespace SelfGraphics.LowGraphics
         {
             var eqPos = obj as Point2;
             if (eqPos == null) return false;
-            return eqPos.X == X && eqPos.Y == X;
+            return eqPos.X == X && eqPos.Y == Y;
         }
 
         public override string ToString()
