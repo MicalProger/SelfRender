@@ -19,6 +19,8 @@ namespace SelfGraphics.GraphRT.Graphics2D
             }
         }
 
+        public int Id;
+        
         public Point2 target;
 
         public Point2 Source;

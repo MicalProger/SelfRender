@@ -68,7 +68,7 @@ namespace SelfGraphics.LowGraphics
                 Point2 final = new Point2((double) upper, 0);
                 upper = (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4);
                 final.Y = (double) (upper / lower);
-                final.Color = Color.White;
+                final.Color = col;
                 final.tag = "Pnt pr:{" + tag + "}";
                 List<double> xs = new List<double>() {point1.X, point2.X};
                 List<double> ys = new List<double>() {point1.Y, point2.Y};
