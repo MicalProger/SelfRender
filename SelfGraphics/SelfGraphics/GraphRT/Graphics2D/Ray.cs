@@ -9,11 +9,23 @@ namespace SelfGraphics.GraphRT.Graphics2D
 {
     class Ray
     {
+
+        public int Quater { get
+            {
+                if (angle is (>= 0 and < 90)) return 1;
+                if (angle is (>= 91 and < 180)) return 2;
+                if (angle is (>= 181 and < 360)) return 3;
+                return 4;
+            }
+        }
+
         public Point2 target;
 
         public Point2 Source;
 
         public double angle;
+
+        public double Angle { get => angle; set => angle = value % 360; }
 
         public Grid grid;
 
@@ -64,12 +76,17 @@ namespace SelfGraphics.GraphRT.Graphics2D
             return Source + new Point2(s * len, c * len);
         }
 
-        public void Launch()
+        public List<Point2> Launch()
         {
             List<Point2> cols = grid.GetLayer(1).Select(p => p.GetCollision(this)).Where(p => p != null).ToList();
             Console.WriteLine(cols.Count);
             //cols.ForEach(p => Console.WriteLine(Tools.GetAngle(p, Source)));
-            target = cols.Count == 0 ? Point2.Zero : cols.OrderBy(p => p.GetLenTo(Source)).First();
+            target = cols.Count == 0 ? null : cols.OrderBy(p => p.GetLenTo(Source)).First();
+            if(target == null)
+            {
+
+            }
+            return cols;
             Console.WriteLine(target.tag);
         }
     }

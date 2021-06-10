@@ -18,6 +18,7 @@ namespace SelfGraphics.LowGraphics
         public double W;
 
         public double H;
+
         private Color col;
 
         public Rectangle(Point2 startPos, Vector2f sides, Color color)
@@ -50,14 +51,24 @@ namespace SelfGraphics.LowGraphics
             }
         }
 
+        public List<Line> GetSides()
+        {
+            List<Line> sides = new List<Line>();
+            sides.Add(new Line(startPos, startPos + new Point2(W, 0), col));
+            sides.Add(new Line(startPos, startPos + new Point2(0, H), col));
+            sides.Add(new Line(startPos + new Point2(W, 0), startPos + new Point2(W, H), col));
+            sides.Add(new Line(startPos + new Point2(0, H), startPos + new Point2(W, H), col));
+            return sides;
+        }
+
         public override Point2 GetCollision(Ray ray)
         {
             Point2 fin = null;
             List<Line> sides = new List<Line>();
             sides.Add(new Line(startPos, startPos + new Point2(W, 0), col) { tag = (tag.ToString() + " L1") });
-            sides.Add(new Line(startPos, startPos + new Point2(0, H), col) { tag = (tag.ToString() + " L2") });
-            sides.Add(new Line(startPos + new Point2(W, 0), startPos + new Point2(0, H), col) { tag = (tag.ToString() + " L3") });
-            sides.Add(new Line(startPos + new Point2(0, H), startPos + new Point2(W, 0), col) { tag = (tag.ToString() + " L4") });
+            sides.Add(new Line(startPos + new Point2(W, 0), startPos + new Point2(W, H), col) { tag = (tag.ToString() + " L2") });
+            sides.Add(new Line(startPos + new Point2(W, H), startPos + new Point2(0, H), col) { tag = (tag.ToString() + " L3") });
+            sides.Add(new Line(startPos + new Point2(0, H), startPos, col) { tag = (tag.ToString() + " L4") });
             var tmpPixels = (from line in sides
                 select line.GetCollision(ray)).Where(l => l != null).ToList();
             if (tmpPixels.Count == 0) return null;
