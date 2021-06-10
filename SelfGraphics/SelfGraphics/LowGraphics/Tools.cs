@@ -7,27 +7,6 @@ using System.Threading.Tasks;
 
 namespace SelfGraphics.LowGraphics
 {
-    static class Menenger
-    {
-
-        public static int count;
-
-        public static List<object> Buffer = new List<object>();
-
-        public delegate void Todo(object args);
-
-        public static Todo todo;
-
-        public static void AddThread(object args)
-        {
-            while (Environment.ProcessorCount - 1 < count) continue;
-                count++;
-            new Thread(new ParameterizedThreadStart(todo)).Start(args);
-        }
-
-
-
-    }
     static class Tools
     {
 

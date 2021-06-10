@@ -10,7 +10,7 @@ using SelfGraphics.GraphRT.Graphics2D;
 
 namespace SelfGraphics.LowGraphics
 {
-    class Point2 : Prim
+    public class Point2 : Prim
     {
         public static Point2 Zero = new Point2(0, 0);
         

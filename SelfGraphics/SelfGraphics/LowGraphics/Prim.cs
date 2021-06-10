@@ -4,7 +4,7 @@ using SFML.Graphics;
 
 namespace SelfGraphics.LowGraphics
 {
-    abstract class Prim
+    public abstract class Prim
     {
         public Point2 Center;
         

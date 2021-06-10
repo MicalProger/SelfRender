@@ -1,125 +1,46 @@
-﻿using SelfGraphics.GraphRT.Graphics2D;
-using SelfGraphics.LowGraphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using SelfGraphics.GraphRT.Graphics2D;
+using SelfGraphics.LowGraphics;
+using SFML.Graphics;
 
 namespace SelfGraphics.GraphRT
 {
-
-    enum RenderMode
+    public class Camera
     {
-        SingleRender = 1,
-        AlwaysRender = 2
-    }
-    class Camera
-    {
-        RenderMode options;
+        public Camera(double angle, Point2 position, double fow, Grid imageGrid)
+        {
+            Angle = angle;
+            Position = position;
+            FOW = fow;
+            ImageGrid = imageGrid;
+        }
 
-        public Grid grid;
-
-        public double FOW;
+        public double Angle;
 
         public Point2 Position;
 
-        double angle;
-        public void SetRoration(double value) => angle = value;
+        public double FOW;
 
-        public double GetRotation() => angle;
+        public Grid ImageGrid;
 
-        public void Rotate(double value) => angle += value;
-
-
-        public Camera(Point2 pos, double angle, double FOW, RenderMode mode)
+        public List<Point2> RenderGrid(int rays, bool vis)
         {
-            options = mode;
-            this.FOW = FOW;
-            Position = pos;
-            this.angle = angle;
-        }
-
-        public static void RenderPoint(object renderData)
-        {
-            var data = renderData as RenderData;
-            var k = Tools.ToRads(data.Ang);
-            Ray local = new Ray(RenderData.Position, data.Ang) { grid = RenderData.BaseGrid }; //.ChangedFor(Math.Sin(k * (RenderData.MinLen - 2)), Math.Cos(k * (RenderData.MinLen - 2)))
-            var endPoint = local.GetEndpoint();
-            if (endPoint != null)
+            List<Point2> renders = new List<Point2>();
+            for (double i = -FOW / 2; i < FOW / 2; i += FOW / rays)
             {
-                endPoint.SetLenTo(RenderData.Position);
-                endPoint.Len += Math.Sin(data.Ang - RenderData.AbsAngle);
-                endPoint.tag = data.index - 1;
-                lock (Menenger.Buffer)
+                Ray tmpRay = new Ray(Position, Angle + i) {grid = ImageGrid};
+                renders.Add(tmpRay.GetEndpoint());
+                renders.Last().SetLenTo(Position);
+            }
+            if (vis)
+            {
+                foreach (var point in renders)
                 {
-                    Menenger.Buffer.Add(endPoint);
+                    ImageGrid.AddPrim(new Line(Position, point, Color.Yellow));
                 }
             }
-            Menenger.count--;
-
-        }
-
-        public void Render(int rayCount)
-        {
-            Menenger.Buffer.Clear();
-            RenderData.AbsAngle = angle;
-            RenderData.Position = Position;
-            RenderData.BaseGrid = grid;
-            List<double> angles = new List<double>();
-
-            for (double i = -FOW / 2; i < FOW / 2; i += FOW / rayCount)
-            {
-                angles.Add(angle + i);
-            }
-            Menenger.todo = RenderPoint;
-            foreach (var item in angles)
-            {
-                Menenger.AddThread(new RenderData(item) { index = angles.IndexOf(item) });
-            }
-        }
-
-        public List<Point2> GetImage2(int count)
-        {
-            RenderData.Position = Position;
-            RenderData.BaseGrid = grid;
-            List<double> angles = new List<double>();
-            var c = 0;
-            for (double i = -FOW / 2; i < FOW / 2; i += FOW / count)
-            {
-                angles.Add(angle + i);
-            }
-            Menenger.todo = RenderPoint;
-            foreach (var item in angles)
-            {
-                Menenger.AddThread(new RenderData(item) { index = angles.IndexOf(item) });
-            }
-            while (Menenger.count != 0) continue;
-            var f = Menenger.Buffer.Select(b => b as Point2).ToList();
-            Menenger.Buffer.Clear();
-            return f;
-
-
+            return renders;
         }
     }
-
-    class RenderData
-    {
-        public static double AbsAngle;
-
-        public int index;
-
-        public static Point2 Position;
-
-        public double Ang;
-
-        public static Grid BaseGrid;
-        
-        public RenderData(double aAg)
-        {
-            Ang = aAg;
-        }
-    }
-
 }

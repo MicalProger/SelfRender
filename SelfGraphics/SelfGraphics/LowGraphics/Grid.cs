@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SelfGraphics.LowGraphics
 {
-    class Grid
+    public class Grid
     {
         List<List<Prim>> layers = new List<List<Prim>>() {new List<Prim>(), new List<Prim>()};
         public List<Prim> GetLayer(int layer) => layers[layer];
