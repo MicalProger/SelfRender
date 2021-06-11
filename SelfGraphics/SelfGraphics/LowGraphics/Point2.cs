@@ -59,6 +59,11 @@ namespace SelfGraphics.LowGraphics
             return new Point2(p1.X + p2.X, p1.Y + p2.Y);
         }
         
+        
+        public static Point2 operator -(Point2 p1, Point2 p2)
+        {
+            return new Point2(p1.X - p2.X, p1.Y - p2.Y);
+        }
         public Point2 Copy()
         {
             return new Point2(X, Y) {Len = this.Len };

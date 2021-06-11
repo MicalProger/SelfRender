@@ -16,20 +16,22 @@ namespace SelfGraphics
         static RenderWindow _mapWindow;
 
         static RenderWindow _viewWindow;
-
+        
+        const double sence = 0.25; 
+        
         const double Height = 900;
 
         const double Wight = 1600;
 
-        static double ang = 200;
+        static double ang = 180;
 
-        static Point2 viewPosition = new Point2(100, 100);
+        static Point2 viewPosition = new Point2(Wight / 2, 100);
 
         static Grid mapGrid;
 
         static Grid viewGrid;
 
-        static int rays = 150;
+        static int rays = 200;
 
         static void InitMap()
         {
@@ -38,13 +40,8 @@ namespace SelfGraphics
             _mapWindow.SetActive(true);
             _mapWindow.Resized += (o, args) => { _mapWindow.Size = new Vector2u((uint)Wight, (uint)Height); };
             _mapWindow.KeyPressed += KeyHandler;
-            mapGrid = new Grid((uint)Wight, (uint)Height);
+            mapGrid = new Grid((uint)Wight * 2, (uint)Height * 2);
             mapGrid.SetBorder(Color.Magenta);
-            var rg = new Rectangle(new Point2(250, 250), new(100, 100), Color.Red) { tag = "Rg" };
-            var rr = new Rectangle(new Point2(250, 250), new(100, 100), Color.Green) { tag = "Rr" };
-            rr.startPos.X = 700;
-            mapGrid.AddPrim(rg);
-            mapGrid.AddPrim(rr);
             mapGrid.AddLayer();
         }
 
@@ -75,30 +72,34 @@ namespace SelfGraphics
             InitMap();
             ViewInit();
             Stopwatch time = new Stopwatch();
-            Camera cam = new Camera(200, viewPosition, 60, mapGrid);
+            Camera cam = new Camera(200, viewPosition, 100, mapGrid);
             while (_mapWindow.IsOpen && _viewWindow.IsOpen)
             {
                 time.Start();
                 _mapWindow.Clear(Color.Black);
                 _mapWindow.DispatchEvents();
                 _viewWindow.Clear(Color.Black);
+                _viewWindow.SetMouseCursor(new Cursor(Cursor.CursorType.Cross));
                 _viewWindow.DispatchEvents();
                 {
                     cam.Position = viewPosition;
+                    ang += (Mouse.GetPosition(_viewWindow).X - Wight / 2) * sence;
                     cam.Angle = ang;
                     var colls = cam.RenderGrid(rays, true, 100);
                     var w = Wight / colls.Count;
                     foreach (var point in colls)
                     {
-                        double k = GetViewHeight(point.Len, 1900);
+                        double k = GetViewHeight(point.Len, 3500);
                         double h = k * Height;
                         point.Color = new Color((byte)(point.Color.R * k), (byte)(point.Color.G * k), (byte)(point.Color.B * k));
                         var tmpRect = new Rectangle(new Point2(w * colls.IndexOf(point), (Height - h) / 2),
                             new Vector2f((float)w, (float)h), point.Color);
                         viewGrid.AddPrim(tmpRect, 1);
                     }
+                    Mouse.SetPosition(new Vector2i((int) (Wight / 2), (int) (Height / 2)), _viewWindow);
                 }
-
+                Console.WriteLine(viewPosition.ToString());
+                Console.WriteLine(ang);
                 mapGrid.ShowToScreen(_mapWindow);
                 _mapWindow.Display();
                 _mapWindow.SetTitle($"MAP : FPS {1000 / (double)(time.ElapsedMilliseconds)}");
@@ -116,8 +117,8 @@ namespace SelfGraphics
         private static void KeyHandler(object sender, KeyEventArgs e)
         {
             if (e.Code == Keyboard.Key.Escape) _mapWindow.Close();
-            if (e.Code == Keyboard.Key.E) ang += 3;
-            if (e.Code == Keyboard.Key.Q) ang -= 3;
+            if (e.Code == Keyboard.Key.E) ang += 2;
+            if (e.Code == Keyboard.Key.Q) ang -= 2;
             if (e.Code == Keyboard.Key.C) mapGrid.ClearLayer(3);
             if (e.Code == Keyboard.Key.W)
             {
@@ -147,6 +148,11 @@ namespace SelfGraphics
             {
                 rays--;
                 Console.WriteLine(rays);
+            }
+
+            if (e.Code == Keyboard.Key.Escape)
+            {
+                _viewWindow.Close();
             }
         }
     }

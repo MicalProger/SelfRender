@@ -27,6 +27,7 @@ namespace SelfGraphics.GraphRT
 
         public List<Point2> RenderGrid(int rays, bool vis, double matrixSize)
         {
+            Console.WriteLine("Start");
             Grid localGrid = new Grid(1000, 1000);
             localGrid.SetBorder(Color.Green);
             List<Point2> renders = new List<Point2>();
@@ -43,6 +44,8 @@ namespace SelfGraphics.GraphRT
                 //tmpRay.Source = new Point2(500, ( 1 / Math.Tan(Tools.ToRads(i))) * matrixSize / 2);
                 //var correction = tmpRay.GetEndpoint().GetLenTo(tmpRay.Source);
                 //tmpPoint.Len -= correction;
+                tmpPoint.Len *= Math.Cos(Tools.ToRads(i));
+                // Console.WriteLine(Math.Cos(Tools.ToRads(i)));
                 renders.Add(tmpPoint);
             }
             if (vis)
@@ -53,6 +56,7 @@ namespace SelfGraphics.GraphRT
                     ImageGrid.AddPrim(new Line(Position, point, Color.Yellow), 2);
                 }
             }
+            Console.WriteLine("End");
             return renders;
         }
     }
