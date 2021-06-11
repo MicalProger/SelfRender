@@ -23,21 +23,25 @@ namespace SelfGraphics
 
         static double ang = 200;
 
+        static Point2 viewPosition = new Point2(100, 100);
+
         static Grid mapGrid;
 
         static Grid viewGrid;
 
+        static int rays = 150;
+
         static void InitMap()
         {
-            _mapWindow = new RenderWindow(new VideoMode((uint) Wight, (uint) Height), "Window", Styles.Default);
+            _mapWindow = new RenderWindow(new VideoMode((uint)Wight, (uint)Height), "Window", Styles.Default);
             _mapWindow.Closed += (o, args) => { _mapWindow.Close(); };
             _mapWindow.SetActive(true);
-            _mapWindow.Resized += (o, args) => { _mapWindow.Size = new Vector2u((uint) Wight, (uint) Height); };
+            _mapWindow.Resized += (o, args) => { _mapWindow.Size = new Vector2u((uint)Wight, (uint)Height); };
             _mapWindow.KeyPressed += KeyHandler;
-            mapGrid = new Grid((uint) Wight, (uint) Height, Color.Black);
+            mapGrid = new Grid((uint)Wight, (uint)Height);
             mapGrid.SetBorder(Color.Magenta);
-            var rg = new Rectangle(new Point2(250, 250), new(200, 200), Color.Red) {tag = "Rg"};
-            var rr = new Rectangle(new Point2(250, 250), new(200, 200), Color.Green) {tag = "Rr"};
+            var rg = new Rectangle(new Point2(250, 250), new(100, 100), Color.Red) { tag = "Rg" };
+            var rr = new Rectangle(new Point2(250, 250), new(100, 100), Color.Green) { tag = "Rr" };
             rr.startPos.X = 700;
             mapGrid.AddPrim(rg);
             mapGrid.AddPrim(rr);
@@ -46,15 +50,15 @@ namespace SelfGraphics
 
         static void ViewInit()
         {
-            _viewWindow = new RenderWindow(new VideoMode((uint) Wight, (uint) Height), "Window", Styles.Default);
+            _viewWindow = new RenderWindow(new VideoMode((uint)Wight, (uint)Height), "Window", Styles.Default);
             _viewWindow.Closed += (o, args) => { _viewWindow.Close(); };
-            _viewWindow.Resized += (o, args) => { _mapWindow.Size = new Vector2u((uint) Wight, (uint) Height); };
+            _viewWindow.Resized += (o, args) => { _mapWindow.Size = new Vector2u((uint)Wight, (uint)Height); };
             _viewWindow.SetActive(true);
             _viewWindow.KeyPressed += KeyHandler;
-            viewGrid = new Grid((uint) Wight, (uint) Height, Color.Black);
-            var sky = new Rectangle(Point2.Zero, new Vector2f((float) Wight, (float) Height / 2), Color.Cyan);
+            viewGrid = new Grid((uint)Wight, (uint)Height);
+            var sky = new Rectangle(Point2.Zero, new Vector2f((float)Wight, (float)Height / 2), Color.Cyan);
             viewGrid.AddPrim(sky, 0);
-            var ground = new Rectangle(new Point2(0, Height / 2), new Vector2f((float) Wight, (float) Height / 2),
+            var ground = new Rectangle(new Point2(0, Height / 2), new Vector2f((float)Wight, (float)Height / 2),
                 Color.Black);
             viewGrid.AddPrim(ground, 0);
         }
@@ -62,7 +66,7 @@ namespace SelfGraphics
         static double GetViewHeight(double dist, double maximal)
         {
             if (dist > maximal) return 0;
-            var res =  (maximal - dist) / maximal;
+            var res = (maximal - dist) / maximal;
             return res;
         }
 
@@ -71,7 +75,7 @@ namespace SelfGraphics
             InitMap();
             ViewInit();
             Stopwatch time = new Stopwatch();
-            Camera cam = new Camera(200, new Point2(50, 50), 60, mapGrid);
+            Camera cam = new Camera(200, viewPosition, 60, mapGrid);
             while (_mapWindow.IsOpen && _viewWindow.IsOpen)
             {
                 time.Start();
@@ -80,25 +84,27 @@ namespace SelfGraphics
                 _viewWindow.Clear(Color.Black);
                 _viewWindow.DispatchEvents();
                 {
+                    cam.Position = viewPosition;
                     cam.Angle = ang;
-                    var colls = cam.RenderGrid(100, true);
+                    var colls = cam.RenderGrid(rays, true, 100);
                     var w = Wight / colls.Count;
                     foreach (var point in colls)
                     {
-                        point.SetLenTo(cam.Position);
-                        double h = GetViewHeight(point.Len, 2000) * Height;
+                        double k = GetViewHeight(point.Len, 1900);
+                        double h = k * Height;
+                        point.Color = new Color((byte)(point.Color.R * k), (byte)(point.Color.G * k), (byte)(point.Color.B * k));
                         var tmpRect = new Rectangle(new Point2(w * colls.IndexOf(point), (Height - h) / 2),
-                            new Vector2f((float) w, (float) h), point.Color);
+                            new Vector2f((float)w, (float)h), point.Color);
                         viewGrid.AddPrim(tmpRect, 1);
                     }
                 }
 
                 mapGrid.ShowToScreen(_mapWindow);
                 _mapWindow.Display();
-                _mapWindow.SetTitle($"MAP : FPS {1000 / (double) (time.ElapsedMilliseconds)}");
+                _mapWindow.SetTitle($"MAP : FPS {1000 / (double)(time.ElapsedMilliseconds)}");
                 viewGrid.ShowToScreen(_viewWindow);
                 _viewWindow.Display();
-                _viewWindow.SetTitle($"VIEW : FPS {1000 / (double) (time.ElapsedMilliseconds)}");
+                _viewWindow.SetTitle($"VIEW : FPS {1000 / (double)(time.ElapsedMilliseconds)}");
                 mapGrid.ClearLayer(2);
                 viewGrid.ClearLayer(1);
                 time.Reset();
@@ -110,9 +116,38 @@ namespace SelfGraphics
         private static void KeyHandler(object sender, KeyEventArgs e)
         {
             if (e.Code == Keyboard.Key.Escape) _mapWindow.Close();
-            if (e.Code == Keyboard.Key.Right) ang -= 1;
-            if (e.Code == Keyboard.Key.Left) ang += 1;
+            if (e.Code == Keyboard.Key.E) ang += 3;
+            if (e.Code == Keyboard.Key.Q) ang -= 3;
             if (e.Code == Keyboard.Key.C) mapGrid.ClearLayer(3);
+            if (e.Code == Keyboard.Key.W)
+            {
+                Ray view = new Ray(viewPosition, ang);
+                viewPosition = view.GetPixelByLen(50);
+            }
+            if (e.Code == Keyboard.Key.S)
+            {
+                Ray view = new Ray(viewPosition, ang);
+                viewPosition = view.GetPixelByLen(-50);
+            }
+            if (e.Code == Keyboard.Key.A)
+            {
+                Ray view = new Ray(viewPosition, ang - 90);
+                viewPosition = view.GetPixelByLen(50);
+            }
+            if (e.Code == Keyboard.Key.D)
+            {
+                Ray view = new Ray(viewPosition, ang - 90);
+                viewPosition = view.GetPixelByLen(-50);
+            }if(e.Code == Keyboard.Key.Up)
+            {
+                rays++;
+                Console.WriteLine(rays);
+            } 
+            if(e.Code == Keyboard.Key.Down)
+            {
+                rays--;
+                Console.WriteLine(rays);
+            }
         }
     }
 }

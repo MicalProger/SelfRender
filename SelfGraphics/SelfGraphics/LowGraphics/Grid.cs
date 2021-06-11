@@ -11,15 +11,12 @@ namespace SelfGraphics.LowGraphics
         List<List<Prim>> layers = new List<List<Prim>>() {new List<Prim>(), new List<Prim>()};
         public List<Prim> GetLayer(int layer) => layers[layer];
 
-        Color color;
-
         uint w;
 
         uint h;
 
-        public Grid(uint wight, uint height, Color standart)
+        public Grid(uint wight, uint height)
         {
-            color = standart;
             h = height;
             w = wight;
         }
@@ -78,11 +75,10 @@ namespace SelfGraphics.LowGraphics
             layers.Add(new List<Prim>());
         }
 
-        public void SetColor(Color color) => this.color = color;
+        
 
         public void ShowToScreen(RenderWindow window)
         {
-            Image i = new Image(w, h, color);
             foreach (var prims in layers)
             {
                 foreach (var data in prims)
