@@ -36,8 +36,8 @@ namespace SelfGraphics
             _mapWindow.KeyPressed += KeyHandler;
             mapGrid = new Grid((uint) Wight, (uint) Height, Color.Black);
             mapGrid.SetBorder(Color.Magenta);
-            var rg = new Rectangle(new Point2(250, 250), new(55, 55), Color.Red) {tag = "Rg"};
-            var rr = new Rectangle(new Point2(250, 250), new(55, 55), Color.Green) {tag = "Rr"};
+            var rg = new Rectangle(new Point2(250, 250), new(200, 200), Color.Red) {tag = "Rg"};
+            var rr = new Rectangle(new Point2(250, 250), new(200, 200), Color.Green) {tag = "Rr"};
             rr.startPos.X = 700;
             mapGrid.AddPrim(rg);
             mapGrid.AddPrim(rr);
@@ -62,7 +62,7 @@ namespace SelfGraphics
         static double GetViewHeight(double dist, double maximal)
         {
             if (dist > maximal) return 0;
-            var res = (maximal - dist) / maximal;
+            var res =  (maximal - dist) / maximal;
             return res;
         }
 
@@ -81,14 +81,14 @@ namespace SelfGraphics
                 _viewWindow.DispatchEvents();
                 {
                     cam.Angle = ang;
-                    var colls = cam.RenderGrid(35, true);
+                    var colls = cam.RenderGrid(100, true);
                     var w = Wight / colls.Count;
                     foreach (var point in colls)
                     {
                         point.SetLenTo(cam.Position);
-                        double H = GetViewHeight(point.Len, 2000) * Height;
-                        var tmpRect = new Rectangle(new Point2(w * colls.IndexOf(point), (Height - H) / 4),
-                            new Vector2f((float) w, (float) H), point.Color);
+                        double h = GetViewHeight(point.Len, 2000) * Height;
+                        var tmpRect = new Rectangle(new Point2(w * colls.IndexOf(point), (Height - h) / 2),
+                            new Vector2f((float) w, (float) h), point.Color);
                         viewGrid.AddPrim(tmpRect, 1);
                     }
                 }
@@ -100,6 +100,7 @@ namespace SelfGraphics
                 _viewWindow.Display();
                 _viewWindow.SetTitle($"VIEW : FPS {1000 / (double) (time.ElapsedMilliseconds)}");
                 mapGrid.ClearLayer(2);
+                viewGrid.ClearLayer(1);
                 time.Reset();
                 Thread.Sleep(50);
             }

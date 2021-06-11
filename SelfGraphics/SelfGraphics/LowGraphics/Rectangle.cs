@@ -25,8 +25,8 @@ namespace SelfGraphics.LowGraphics
         {
             this.col = color;
             this.startPos = startPos;
-            W = startPos.ChangedFor(sides.X, sides.Y).X;
-            H = startPos.ChangedFor(sides.X, sides.Y).Y;
+            W = sides.X;
+            H = sides.Y;
         }
 
 
