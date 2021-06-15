@@ -61,7 +61,7 @@ namespace SelfGraphics.LowGraphics
             return sides;
         }
 
-        public override Point2 GetCollision(Ray ray)
+        public override Point2 GetCollision(Ray2D ray2D)
         {
             Point2 fin = null;
             List<Line> sides = new List<Line>();
@@ -70,9 +70,9 @@ namespace SelfGraphics.LowGraphics
             sides.Add(new Line(startPos + new Point2(W, H), startPos + new Point2(0, H), col) { tag = (tag.ToString() + " L3") });
             sides.Add(new Line(startPos + new Point2(0, H), startPos, col) { tag = (tag.ToString() + " L4") });
             var tmpPixels = (from line in sides
-                select line.GetCollision(ray)).Where(l => l != null).ToList();
+                select line.GetCollision(ray2D)).Where(l => l != null).ToList();
             if (tmpPixels.Count == 0) return null;
-            tmpPixels.ForEach(p => p.SetLenTo(ray.Source));
+            tmpPixels.ForEach(p => p.SetLenTo(ray2D.Source));
             tmpPixels = tmpPixels.OrderBy(i => i.Len).ToList();
             return tmpPixels.First();
         }

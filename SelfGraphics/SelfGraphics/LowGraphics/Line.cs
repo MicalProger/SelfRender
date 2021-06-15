@@ -7,7 +7,7 @@ using SFML.System;
 
 namespace SelfGraphics.LowGraphics
 {
-    class Line : Prim
+    public class Line : Prim
     {
         public double Ang
         {
@@ -47,19 +47,19 @@ namespace SelfGraphics.LowGraphics
             }
         }
 
-        public override Point2 GetCollision(Ray ray)
+        public override Point2 GetCollision(Ray2D ray2D)
         {
             try
             {
                 decimal x1, x2, x3, x4, y1, y2, y3, y4 = Decimal.Zero;
                 x1 = (decimal) point1.X;
                 x2 = (decimal) point2.X;
-                x3 = (decimal) ray.Source.X;
-                x4 = (decimal) (ray.Source.X + Math.Sin(Tools.ToRads(ray.angle)) * 3);
+                x3 = (decimal) ray2D.Source.X;
+                x4 = (decimal) (ray2D.Source.X + Math.Sin(Tools.ToRads(ray2D.angle)) * 3);
                 y1 = (decimal) point1.Y;
                 y2 = (decimal) point2.Y;
-                y3 = (decimal) ray.Source.Y;
-                y4 = (decimal) (ray.Source.Y + Math.Cos(Tools.ToRads(ray.angle)) * 3);
+                y3 = (decimal) ray2D.Source.Y;
+                y4 = (decimal) (ray2D.Source.Y + Math.Cos(Tools.ToRads(ray2D.angle)) * 3);
                 decimal upper = Decimal.Zero;
                 upper = (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4);
                 decimal lower = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SelfGraphics.GraphRT.Graphics2D
 {
-    public class Ray
+    public class Ray2D
     {
 
         public int Quater { get
@@ -31,18 +31,18 @@ namespace SelfGraphics.GraphRT.Graphics2D
 
         public Grid grid;
 
-        public Ray(Point2 start, Point2 dirction)
+        public Ray2D(Point2 start, Point2 dirction)
         {
             Source = start;
             angle = Math.Atan(dirction.Y / dirction.X) / Math.PI * 180;
         }
 
-        public Ray(Grid grid)
+        public Ray2D(Grid grid)
         {
             this.grid = grid;
         }
 
-        public Ray(Point2 start, double angle)
+        public Ray2D(Point2 start, double angle)
         {
             Source = start;
             this.angle = angle;

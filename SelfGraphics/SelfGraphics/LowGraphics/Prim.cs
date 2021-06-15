@@ -12,7 +12,7 @@ namespace SelfGraphics.LowGraphics
         
         public object tag;
 
-        public abstract Point2 GetCollision(Ray ray);
+        public abstract Point2 GetCollision(Ray2D ray2D);
         
         public abstract List<Point2> GetPixels();
 

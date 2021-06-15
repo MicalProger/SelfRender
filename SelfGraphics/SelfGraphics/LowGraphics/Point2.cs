@@ -108,11 +108,11 @@ namespace SelfGraphics.LowGraphics
 
         }
 
-        public override Point2 GetCollision(Ray ray)
+        public override Point2 GetCollision(Ray2D ray2D)
         {
-            var dir = Tools.ToRads(ray.angle);
-            SetLenTo(ray.Source);
-            if (ray.Source + new Point2(Math.Sin(dir) * Len, Math.Cos(dir) * Len) == this) return this;
+            var dir = Tools.ToRads(ray2D.angle);
+            SetLenTo(ray2D.Source);
+            if (ray2D.Source + new Point2(Math.Sin(dir) * Len, Math.Cos(dir) * Len) == this) return this;
             return null;
 
         }

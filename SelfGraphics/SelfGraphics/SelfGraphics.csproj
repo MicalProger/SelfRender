@@ -25,11 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GraphRT\Graphics3D\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="testMap.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestCube.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

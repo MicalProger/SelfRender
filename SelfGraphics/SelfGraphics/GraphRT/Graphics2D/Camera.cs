@@ -31,18 +31,18 @@ namespace SelfGraphics.GraphRT
             Grid localGrid = new Grid(1000, 1000);
             localGrid.SetBorder(Color.Green);
             List<Point2> renders = new List<Point2>();
-            List<Ray> rayCasts = new List<Ray>();
+            List<Ray2D> rayCasts = new List<Ray2D>();
             int counter = 0;
             double step;
             for (double i = -FOW / 2; i < FOW / 2; i += FOW / rays)
             {
-                Ray tmpRay = new Ray(Position, Angle + i) {grid = ImageGrid};
-                var tmpPoint = tmpRay.GetEndpoint();
+                Ray2D tmpRay2D = new Ray2D(Position, Angle + i) {grid = ImageGrid};
+                var tmpPoint = tmpRay2D.GetEndpoint();
                 tmpPoint.SetLenTo(Position);
-                //tmpRay.grid = localGrid;
-                //tmpRay.Angle = i;
-                //tmpRay.Source = new Point2(500, ( 1 / Math.Tan(Tools.ToRads(i))) * matrixSize / 2);
-                //var correction = tmpRay.GetEndpoint().GetLenTo(tmpRay.Source);
+                //tmpRay2D.grid = localGrid;
+                //tmpRay2D.Angle = i;
+                //tmpRay2D.Source = new Point2(500, ( 1 / Math.Tan(Tools.ToRads(i))) * matrixSize / 2);
+                //var correction = tmpRay2D.GetEndpoint().GetLenTo(tmpRay2D.Source);
                 //tmpPoint.Len -= correction;
                 tmpPoint.Len *= Math.Cos(Tools.ToRads(i));
                 // Console.WriteLine(Math.Cos(Tools.ToRads(i)));
