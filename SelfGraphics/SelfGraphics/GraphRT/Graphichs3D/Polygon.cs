@@ -16,6 +16,7 @@ namespace SelfGraphics.GraphRT.Graphichs3D
         public Point3 GetCollision(Ray3D ray)
         {
             Point3 fin = Point3.Zero;
+
             return fin;
         }
     }

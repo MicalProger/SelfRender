@@ -1,3 +1,4 @@
+using SelfGraphics.LowGraphics;
 using System;
 using System.Globalization;
 
@@ -12,6 +13,27 @@ namespace SelfGraphics.GraphRT.Graphichs3D
             Point3 d = (this - p).Absoluted();
             var s1 = Math.Sqrt(Math.Pow(d.X, 2) + Math.Pow(d.Y, 2));
             Distance = Math.Sqrt(Math.Pow(s1, 2) + Math.Pow(d.Z, 2));
+        }
+
+        public Direction GetDirectionTo(Point3 p)
+        {
+            Direction dir = new Direction(0, 0);
+            var x = Tools.GetAngle(new(X, Y), new(p.X, p.Y));
+            var y = Tools.GetAngle(new(Y, Z), new(p.Y, p.Z));
+            dir.XRotation = x;
+            dir.YRotation = y;
+            return dir;
+        }
+
+        public double GetDistanceTo(Point3 p)
+        {
+            if (Distance == 0)
+            {
+                Point3 d = (this - p).Absoluted();
+                var s1 = Math.Sqrt(Math.Pow(d.X, 2) + Math.Pow(d.Y, 2));
+                Distance = Math.Sqrt(Math.Pow(s1, 2) + Math.Pow(d.Z, 2));
+            }
+            return Distance;
         }
 
         public Point3 Absoluted()
@@ -38,8 +60,8 @@ namespace SelfGraphics.GraphRT.Graphichs3D
         {
             return new Point3(
             Math.Round(X, r)
-            ,Math.Round(Y, r)
-           ,Math.Round(Z, r));
+            , Math.Round(Y, r)
+           , Math.Round(Z, r));
         }
 
 

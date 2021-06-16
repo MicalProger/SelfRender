@@ -20,8 +20,7 @@ namespace SelfGraphics.GraphRT.Graphichs3D
                 {
                     case "o":
                         full.Add(new Claster());
-                        
-                        full.Last().Name = parameter.Split(' ')[1];
+                        full.Last().Tag = parameter.Split(' ')[1];
                         break;
                     case "v":
                         verts.Add(new Point3(parameter.Substring(2)));

@@ -23,7 +23,7 @@ namespace SelfGraphics.GraphRT.Graphichs3D
         public Point3 GetEndpoint(Scence space)
         {
             Point3 final = Point3.Zero;
-            var colls = space.objs.Select(p => p.GetCollision(this)).Where(i => i != null || i != Point3.Zero);
+            var colls = space.objs.Select(p => p.GetCollision(this)).Where(i => i != null || i != Point3.Zero).OrderBy(p => p.GetDistanceTo(Source)).ToList();
             return final;
         }
     }
