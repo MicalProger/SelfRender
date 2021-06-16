@@ -7,8 +7,9 @@ namespace SelfGraphics.GraphRT.Graphichs3D
 {
     public class DotObjLoader
     {
-        public static Claster LoadObj(string file)
+        public static List<Claster> LoadObj(string file)
         {
+            List<Claster> full = new List<Claster>();
             Claster claster = new Claster();
             List<Point3> verts = new List<Point3>();
 
@@ -18,6 +19,9 @@ namespace SelfGraphics.GraphRT.Graphichs3D
                 switch (tag)
                 {
                     case "o":
+                        if(claster != new Claster())
+                            full.Add(claster);
+                        claster = new Claster();
                         claster.Name = parameter.Split(' ')[1];
                         break;
                     case "v":
@@ -31,7 +35,8 @@ namespace SelfGraphics.GraphRT.Graphichs3D
                 }
 
             }
-            return claster;
+
+            return full;
         }
     }
 }

@@ -344,3 +344,4 @@ C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.pdb
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.genruntimeconfig.cache
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestCube.obj
+C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestScence.obj

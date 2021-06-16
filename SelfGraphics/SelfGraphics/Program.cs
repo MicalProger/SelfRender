@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SFML.Graphics;
 using SFML.Window;
 using SelfGraphics.LowGraphics;
@@ -15,8 +16,8 @@ namespace SelfGraphics
     {
         static void Main(string[] args)
         {
-            Claster cl = DotObjLoader.LoadObj("TestCube.obj");
-            Console.WriteLine(cl.Poligons.Count);
+            List<Claster> cl = DotObjLoader.LoadObj("TestScence.obj");
+            Console.WriteLine(cl[1].Poligons.Count);
         }
     }
 }
