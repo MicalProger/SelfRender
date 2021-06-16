@@ -1,3 +1,6 @@
+using SelfGraphics.LowGraphics;
+using System.Linq;
+
 namespace SelfGraphics.GraphRT.Graphichs3D
 {
     public class Ray3D
@@ -15,6 +18,13 @@ namespace SelfGraphics.GraphRT.Graphichs3D
             Source = source;
             Direct = direct;
             MaxReflection = maxReflection;
+        }
+
+        public Point3 GetEndpoint(Scence space)
+        {
+            Point3 final = Point3.Zero;
+            var colls = space.objs.Select(p => p.GetCollision(this)).Where(i => i != null || i != Point3.Zero);
+            return final;
         }
     }
 }

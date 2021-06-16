@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace SelfGraphics.GraphRT.Graphichs3D
 {
-    public class Claster : Rendereble
+    public class Claster
     {
 
         public List<Polygon> Poligons;
@@ -12,7 +12,7 @@ namespace SelfGraphics.GraphRT.Graphichs3D
             Poligons = new List<Polygon>();
         }
         
-        public override Point3 GetCollision(Ray3D ray)
+        public Point3 GetCollision(Ray3D ray)
         {
             throw new System.NotImplementedException();
         }

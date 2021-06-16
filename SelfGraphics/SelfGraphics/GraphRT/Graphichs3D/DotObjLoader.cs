@@ -19,10 +19,9 @@ namespace SelfGraphics.GraphRT.Graphichs3D
                 switch (tag)
                 {
                     case "o":
-                        if(claster != new Claster())
-                            full.Add(claster);
-                        claster = new Claster();
-                        claster.Name = parameter.Split(' ')[1];
+                        full.Add(new Claster());
+                        
+                        full.Last().Name = parameter.Split(' ')[1];
                         break;
                     case "v":
                         verts.Add(new Point3(parameter.Substring(2)));
@@ -30,12 +29,11 @@ namespace SelfGraphics.GraphRT.Graphichs3D
                     case "f":
                         Polygon tmpPoligon = new Polygon( parameter.Split(' ').Skip(1).Take(3)
                             .Select(i => verts[Int32.Parse(i.Split(@"/")[0]) - 1]).ToList());
-                        claster.Poligons.Add(tmpPoligon);
+                        full.Last().Poligons.Add(tmpPoligon);
                         break;
                 }
 
             }
-
             return full;
         }
     }

@@ -5,12 +5,63 @@ namespace SelfGraphics.GraphRT.Graphichs3D
 {
     public class Point3
     {
+        public double Distance;
+
+        public void SetDistanceTo(Point3 p)
+        {
+            Point3 d = (this - p).Absoluted();
+            var s1 = Math.Sqrt(Math.Pow(d.X, 2) + Math.Pow(d.Y, 2));
+            Distance = Math.Sqrt(Math.Pow(s1, 2) + Math.Pow(d.Z, 2));
+        }
+
+        public Point3 Absoluted()
+        {
+            return new Point3(
+                Math.Abs(X),
+                Math.Abs(Y),
+                Math.Abs(Z));
+        }
+
         public override string ToString()
         {
             return $"[{X} {Y} {Z}]";
         }
 
+        public void Round(int r = 2)
+        {
+            X = Math.Round(X, r);
+            Y = Math.Round(Y, r);
+            Z = Math.Round(Z, r);
+        }
+
+        public Point3 Rounded(int r = 2)
+        {
+            return new Point3(
+            Math.Round(X, r)
+            ,Math.Round(Y, r)
+           ,Math.Round(Z, r));
+        }
+
+
+
+        public override bool Equals(object obj)
+        {
+            Point3 p = obj as Point3;
+            return p.X == X && p.Y == Y && p.Z == X;
+        }
+
         public static Point3 Zero = new Point3(0, 0, 0);
+
+        public static Point3 operator +(Point3 p1, Point3 p2)
+        {
+            return new Point3(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
+        }
+
+        public static Point3 operator -(Point3 p1, Point3 p2)
+        {
+            return new Point3(p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z);
+        }
+
         public Point3(double x, double y, double z)
         {
             X = x;
@@ -26,7 +77,7 @@ namespace SelfGraphics.GraphRT.Graphichs3D
             Z = Convert.ToDouble(asixs[2], CultureInfo.InvariantCulture);
 
         }
-        
+
         public Point3(double x, double y)
         {
             X = x;
@@ -38,9 +89,9 @@ namespace SelfGraphics.GraphRT.Graphichs3D
             Y = xyz;
             Z = xyz;
         }
-        
+
         public double X;
-        
+
         public double Y;
 
         public double Z;
