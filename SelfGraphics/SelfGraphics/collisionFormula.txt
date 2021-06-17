@@ -1,0 +1,17 @@
+ax + by + cz + k = 0
+x = dt + e
+y = ft + g
+z = ht + j
+
+a(dt + e) + b(ft + g) + c(ht + j) + k = 0
+
+dt + ae + bft + bg + cht + cj + k= 0
+
+(adt + bft + cht) + (ae + bg + cj + k) = 0
+ae + bg + cj + k = -adt -bft - cht
+
+ae + bg + cj + k = -t(ad + bf + ch)
+
+a * b = c
+b = c / a
+t = -(ae + bg + cj + k) / (ad + bf + ch)

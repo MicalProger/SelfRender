@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace SelfGraphics.GraphRT.Graphichs3D
 {
     public class Polygon
     {
+        public Point3 Normal;
+
         public List<Point3> vertexs;
 
         public Polygon(List<Point3> vertexes)
