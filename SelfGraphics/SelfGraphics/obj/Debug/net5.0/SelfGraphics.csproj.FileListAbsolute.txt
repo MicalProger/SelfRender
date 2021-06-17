@@ -347,3 +347,4 @@ C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\ne
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestScence.obj
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestCube.obj
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestScence.obj
+C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestScence.mtl

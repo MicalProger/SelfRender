@@ -10,13 +10,22 @@ namespace SelfGraphics.LowGraphics
     static class Tools
     {
 
-        public static bool IsContain(Point2 t1, Point2 t2, Point2 t3, Point2 point)
+        public static bool IsInPolygon(Point2[] poly, Point2 point)
         {
-            var bx = t2.X - t1.X;
-            var by = t2.Y - t1.Y;
-            var cx = t3.X - t1.X;
-            var cy = t3.Y - t1.Y;
-            return false;
+            var coef = poly.Skip(1).Select((p, i) => 
+                    (point.Y - poly[i].Y)*(p.X - poly[i].X) 
+                    - (point.X - poly[i].X) * (p.Y - poly[i].Y))
+                .ToList();
+
+            if (coef.Any(p => p == 0))
+                return true;
+
+            for (int i = 1; i < coef.Count(); i++)
+            {
+                if (coef[i] * coef[i - 1] < 0)
+                    return false;
+            }
+            return true;
         }
         
         public static double GetAngle(Point2 p1, Point2 p2)
