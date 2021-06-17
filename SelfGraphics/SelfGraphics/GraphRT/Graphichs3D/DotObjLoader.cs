@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 
-namespace SelfGraphics.GraphRT.Graphichs3D
+namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class DotObjLoader
     {

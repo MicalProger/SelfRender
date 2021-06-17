@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using SFML.Graphics;
 
-namespace SelfGraphics.GraphRT.Graphichs3D
+namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class Claster
     {
-
+        public Color Color;
+        
         public object Tag;
 
         public List<Polygon> Poligons;

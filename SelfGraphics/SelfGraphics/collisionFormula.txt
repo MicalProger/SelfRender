@@ -1,7 +1,9 @@
-ax + by + cz + k = 0
-x = dt + e
-y = ft + g
-z = ht + j
+--
+|ax + by + cz + k = 0
+|x = dt + e
+|y = ft + g
+|z = ht + j
+--
 
 a(dt + e) + b(ft + g) + c(ht + j) + k = 0
 

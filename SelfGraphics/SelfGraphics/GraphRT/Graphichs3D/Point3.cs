@@ -1,13 +1,16 @@
 using SelfGraphics.LowGraphics;
 using System;
 using System.Globalization;
+using SFML.Graphics;
 
-namespace SelfGraphics.GraphRT.Graphichs3D
+namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class Point3
     {
         public double Distance;
 
+        public Color Color;
+        
         public void SetDistanceTo(Point3 p)
         {
             Point3 d = (this - p).Absoluted();

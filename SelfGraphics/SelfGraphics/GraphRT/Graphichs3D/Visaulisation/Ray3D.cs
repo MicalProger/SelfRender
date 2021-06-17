@@ -2,7 +2,7 @@ using SelfGraphics.LowGraphics;
 using System.Linq;
 using SelfGraphics.GraphRT.Graphics2D;
 
-namespace SelfGraphics.GraphRT.Graphichs3D
+namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class Ray3D
     {
@@ -10,7 +10,7 @@ namespace SelfGraphics.GraphRT.Graphichs3D
         
         public double M => GetPointByDist(10).Y - Source.Y;
 
-        public double T => GetPointByDist(10).Z - Source.Z;
+        public double N => GetPointByDist(10).Z - Source.Z;
 
 
         public Point3 Target;
@@ -43,7 +43,7 @@ namespace SelfGraphics.GraphRT.Graphichs3D
         public Point3 GetEndpoint(Scence space)
         {
             Point3 final = Point3.Zero;
-            var colls = space.objs.Select(p => p.GetCollision(this)).Where(i => i != null || i != Point3.Zero).OrderBy(p => p.GetDistanceTo(Source)).ToList();
+            var colls = space.objs.Select(p => p.GetCollision(this)).Where(i => i != null || ! i.Equals( Point3.Zero)).OrderBy(p => p.GetDistanceTo(Source)).ToList();
             return final;
         }
     }

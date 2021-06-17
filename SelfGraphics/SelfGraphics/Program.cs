@@ -6,7 +6,7 @@ using SelfGraphics.LowGraphics;
 using System.Diagnostics;
 using System.Threading;
 using SelfGraphics.GraphRT;
-using SelfGraphics.GraphRT.Graphichs3D;
+using SelfGraphics.GraphRT.Graphics3D;
 using SelfGraphics.GraphRT.Graphics2D;
 using SFML.System;
 

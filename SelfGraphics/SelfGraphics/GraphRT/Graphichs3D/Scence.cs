@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SelfGraphics.GraphRT.Graphichs3D
+namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class Scence
     {
