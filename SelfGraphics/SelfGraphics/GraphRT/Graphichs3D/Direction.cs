@@ -8,6 +8,11 @@ namespace SelfGraphics.GraphRT.Graphics3D
             YRotation = yRotation;
         }
 
+        public static Direction operator +(Direction d1, Direction d2)
+        {
+            return new(d1.XRotation + d2.XRotation, d1.YRotation + d2.YRotation);
+        }
+        
         public double XRotation;
         
         public double YRotation;

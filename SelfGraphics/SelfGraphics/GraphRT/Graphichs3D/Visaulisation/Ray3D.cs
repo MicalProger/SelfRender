@@ -33,17 +33,18 @@ namespace SelfGraphics.GraphRT.Graphics3D
             Point3 p = new Point3(Source.X, Source.Y, Source.Z);
             Ray2D tmpRay = new Ray2D(new Point2(Source.X, Source.Y), Direct.XRotation);
             var a = tmpRay.GetPixelByLen(distance);
-            p += new Point3(a.X, a.Y);
+            p -= new Point3(a.X, a.Y);
             tmpRay = new Ray2D(new Point2(Source.Y, Source.Z), Direct.YRotation);
             a = tmpRay.GetPixelByLen(distance);
-            p += new Point3(0, 0, a.Y);
+            p -= new Point3(0, 0, a.Y);
             return p;
         }
         
         public Point3 GetEndpoint(Scence space)
         {
             Point3 final = Point3.Zero;
-            var colls = space.objs.Select(p => p.GetCollision(this)).Where(i => i != null || !
+            var colls = space.objs.Select(p => p.GetCollision(this)).ToList();
+                colls = colls.Where(i => i != null || !
                 i.Equals( Point3.Zero)).OrderBy(p => p.GetDistanceTo(Source)).ToList();
             return final;
         }
