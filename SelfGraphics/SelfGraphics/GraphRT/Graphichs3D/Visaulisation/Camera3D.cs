@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace SelfGraphics.GraphRT.Graphics3D.Visualization
                     var cPos = Console.GetCursorPosition();
                     Console.SetCursorPosition(0, cPos.Top);
                     Console.Write($"Line {xPos} of {x} is ready (y is {yPos})");
+                    File.WriteAllText("EngLogs.txt", $"Point Ready [x, y] : [{xPos}, {yPos}]", Encoding.UTF8);
                 }
                 xPos++;
                 yPos = 0;

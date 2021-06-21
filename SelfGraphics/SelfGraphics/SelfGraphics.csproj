@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="EngLogs.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="testMap.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
