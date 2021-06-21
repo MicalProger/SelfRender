@@ -19,13 +19,14 @@ namespace SelfGraphics
 
         static void Main(string[] args)
         {
-            _render = new RenderWindow(new VideoMode(500, 500), "Render view");
-            _render.Closed += (sender, eventArgs) => _render.Close(); 
+            
             List<Claster> cl = DotObjLoader.LoadObj("TestScence.obj");
             Scence sc = new Scence();
             sc.objs = cl;
-            Camera3D cam = new Camera3D(75, new Point3(7.5, -7, 5), new Direction(63.6, 46.7));
+            Camera3D cam = new Camera3D(120, new Point3(7.5, -7, 5), new Direction(63.6, 46.7));
             var rnd = cam.RenderImage(sc, 500, 500);
+            _render = new RenderWindow(new VideoMode(500, 500), "Render view");
+            _render.Closed += (sender, eventArgs) => _render.Close(); 
             while (_render.IsOpen)
             {
                 _render.Clear(new(0,0,0));
