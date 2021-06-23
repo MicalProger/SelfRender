@@ -16,7 +16,12 @@ namespace SelfGraphics.GraphRT.Graphics3D
         {
             Poligons = new List<Polygon>();
         }
-        
+
+        public override string ToString()
+        {
+            return $"Name : {Tag} | Total poligions : {Poligons.Count}";
+        }
+
         public Point3 GetCollision(Ray3D ray)
         {
             List<Point3> polygons = Poligons.Select(p => p.GetCollision(ray)).Where(p => p != null).ToList();

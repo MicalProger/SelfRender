@@ -49,7 +49,7 @@ namespace SelfGraphics.GraphRT.Graphics3D
 
         public override string ToString()
         {
-            return $"[{X} {Y} {Z}]";
+            return $"[{Math.Round(X, 3)} : {Math.Round(Y, 3)} : {Math.Round(Z, 3)}]";
         }
 
         public void Round(int r = 2)

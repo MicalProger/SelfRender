@@ -34,14 +34,18 @@ namespace SelfGraphics.GraphRT.Graphics3D.Visualization
             {
                 for (double j = -FOWV / 2; j < FOWV / 2; j += FOWV / x)
                 {
-                    Ray3D tmpRay = new Ray3D(Position, Direct + new Direction(i, j), 1); 
-                    var p = tmpRay.GetEndpoint(scence);
-                    img.SetPixel(xPos, yPos, p.Color);
-                    yPos++;
-                    var cPos = Console.GetCursorPosition();
-                    Console.SetCursorPosition(0, cPos.Top);
-                    Console.Write($"Line {xPos} of {x} is ready (y is {yPos})");
-                    File.WriteAllText("EngLogs.txt", $"Point Ready [x, y] : [{xPos}, {yPos}]", Encoding.UTF8);
+                    try
+                    {
+                        Ray3D tmpRay = new Ray3D(Position, Direct + new Direction(i, j), 1);
+                        var p = tmpRay.GetEndpoint(scence);
+                        img.SetPixel(xPos, yPos, p.Color);
+                        yPos++;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                   
                 }
                 xPos++;
                 yPos = 0;

@@ -72,7 +72,6 @@ namespace SelfGraphics.GraphRT.Graphics3D
 
             return fin;
         }
-
         public Color Color { get; set; }
     }
 }
