@@ -16,4 +16,5 @@ ae + bg + cj + k = -t(ad + bf + ch)
 
 a * b = c
 b = c / a
-t = -(ae + bg + cj + k) / (ad + bf + ch)
+t = -(ae + bg + cj + k) /
+       (ad + bf + ch)

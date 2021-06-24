@@ -9,7 +9,7 @@ namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class Polygon
     {
-        public double D => Normal.X * vertexs[0].X + Normal.Y * vertexs[0].Y + Normal.Y * vertexs[0].Y;
+        public double D => Normal.X * vertexs[0].X + Normal.Y * vertexs[0].Y + Normal.Z * vertexs[0].Z;
 
         public Point3 Normal;
 
@@ -22,6 +22,7 @@ namespace SelfGraphics.GraphRT.Graphics3D
 
         public Polygon()
         {
+
         }
 
         public Point3 GetCollision(Ray3D ray)
@@ -37,10 +38,14 @@ namespace SelfGraphics.GraphRT.Graphics3D
             e = (decimal) ray.Source.X;
             g = (decimal) ray.Source.Y;
             j = (decimal) ray.Source.Z;
+
             k = (decimal) D;
             try
             {
-                t = -(a * e + b * g + c * j + k) / (a * d + b * f + c * h);
+                var A = -(a * e + b * g + c * j + k);
+                var B = (a * d + b * f + c * h);
+                if (A != 0 && B == 0) return null;
+                t = A / B;
             }
             catch (Exception exception)
             {
