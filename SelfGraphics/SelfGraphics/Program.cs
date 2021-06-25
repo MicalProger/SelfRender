@@ -15,10 +15,10 @@ namespace SelfGraphics
             List<Claster> cl = DotObjLoader.LoadObj("newScence.obj");
             Scence sc = new Scence();
             sc.objs = cl;
-            Camera3D cam = new Camera3D(120, new Point3(7.5, -7, 5), new Direction(63.6, 46.7));
+            Camera3D cam = new Camera3D(120, new Point3(7.5, -7, 5), new Direction(63.6, 0, 46.7));
             var rnd = cam.RenderImage(sc, 300, 300);
             _render = new RenderWindow(new VideoMode(300, 300), "Render view");
-            _render.Closed += (sender, eventArgs) => _render.Close();           
+            _render.Closed += (sender, eventArgs) => _render.Close();
             _render.SetActive(true);
             while (_render.IsOpen)
             {

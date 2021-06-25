@@ -1,3 +1,4 @@
+using System;
 using SelfGraphics.LowGraphics;
 using System.Linq;
 using SelfGraphics.GraphRT.Graphics2D;
@@ -6,11 +7,14 @@ namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class Ray3D
     {
-        public double L => GetPointByDist(10).X - Source.X;
+        public double L => 1 - Math.Sqrt(Math.Pow(Math.Cos(Direct.YRotation.ToRadians()), 2) 
+                                         + Math.Pow(Math.Cos(Direct.ZRotation.ToRadians()), 2)) / Math.Sqrt(2);
         
-        public double M => GetPointByDist(10).Y - Source.Y;
+        public double M => 1 - Math.Sqrt(Math.Pow(Math.Cos(Direct.XRotation.ToRadians()), 2) 
+                                         + Math.Pow(Math.Cos(Direct.ZRotation.ToRadians()), 2)) / Math.Sqrt(2);
 
-        public double N => GetPointByDist(10).Z - Source.Z;
+        public double N => 1 - Math.Sqrt(Math.Pow(Math.Cos(Direct.YRotation.ToRadians()), 2)
+                                         + Math.Pow(Math.Cos(Direct.XRotation.ToRadians()), 2)) / Math.Sqrt(2);
 
 
         public Point3 Target;

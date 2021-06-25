@@ -27,6 +27,11 @@ namespace SelfGraphics.LowGraphics
             }
             return true;
         }
+
+        public static double ToRadians(this double a)
+        {
+            return ToRads(a);
+        }
         
         public static double GetAngle(Point2 p1, Point2 p2)
         {

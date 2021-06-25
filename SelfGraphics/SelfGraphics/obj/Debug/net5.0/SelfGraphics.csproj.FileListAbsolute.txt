@@ -184,7 +184,6 @@ C:\Users\Mikhail\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net
 C:\Users\Mikhail\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.genruntimeconfig.cache
 C:\Users\Mikhail\source\repos\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\testMap.png
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SelfGraphics.exe
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\testMap.png
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SelfGraphics.deps.json
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SelfGraphics.runtimeconfig.json
 C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\SelfGraphics.runtimeconfig.dev.json
@@ -342,9 +341,9 @@ C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\ref\SelfGraphics.dll
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.pdb
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\obj\Debug\net5.0\SelfGraphics.genruntimeconfig.cache
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestCube.obj
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestScence.obj
-C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\TestScence.mtl
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\EngLogs.txt
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\newScence.mtl
 C:\Users\RazRab\source\repos\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\newScence.obj
+C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\EngLogs.txt
+C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\newScence.mtl
+C:\Users\Mikhail\RiderProjects\SelfRender\SelfGraphics\SelfGraphics\bin\Debug\net5.0\newScence.obj

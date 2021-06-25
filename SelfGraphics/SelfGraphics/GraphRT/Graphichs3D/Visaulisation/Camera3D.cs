@@ -36,7 +36,7 @@ namespace SelfGraphics.GraphRT.Graphics3D.Visualization
                 {
                     try
                     {
-                        Ray3D tmpRay = new Ray3D(Position, Direct + new Direction(i, j), 1);
+                        Ray3D tmpRay = new Ray3D(Position, Direct + new Direction(i, 0,j), 1);
                         var p = tmpRay.GetEndpoint(scence);
                         img.SetPixel(xPos, yPos, p.Color);
                         yPos++;

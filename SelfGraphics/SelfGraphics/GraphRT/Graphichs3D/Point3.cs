@@ -20,7 +20,7 @@ namespace SelfGraphics.GraphRT.Graphics3D
 
         public Direction GetDirectionTo(Point3 p)
         {
-            Direction dir = new Direction(0, 0);
+            Direction dir = new Direction(0, 0,0);
             var x = Tools.GetAngle(new(X, Y), new(p.X, p.Y));
             var y = Tools.GetAngle(new(Y, Z), new(p.Y, p.Z));
             dir.XRotation = x;
