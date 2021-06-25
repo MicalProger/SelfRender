@@ -10,7 +10,9 @@ namespace SelfGraphics.GraphRT.Graphics3D
         public double Distance;
 
         public Color Color;
-        
+
+        public double Module => Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2) + Math.Pow(Z, 2));
+
         public void SetDistanceTo(Point3 p)
         {
             Point3 d = (this - p).Absoluted();
@@ -20,7 +22,7 @@ namespace SelfGraphics.GraphRT.Graphics3D
 
         public Direction GetDirectionTo(Point3 p)
         {
-            Direction dir = new Direction(0, 0);
+            Direction dir = new Direction(0, 0, 0);
             var x = Tools.GetAngle(new(X, Y), new(p.X, p.Y));
             var y = Tools.GetAngle(new(Y, Z), new(p.Y, p.Z));
             dir.XRotation = x;
