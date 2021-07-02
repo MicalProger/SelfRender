@@ -54,17 +54,17 @@ namespace SelfGraphics.GraphRT.Graphics3D
 
         public void Round(int r = 2)
         {
-            X = Math.Round(X, r);
-            Y = Math.Round(Y, r);
-            Z = Math.Round(Z, r);
+            X = X.Round(r);
+            Y = Y.Round(r);
+            Z = Z.Round(r);
         }
 
         public Point3 Rounded(int r = 2)
         {
             return new Point3(
-            Math.Round(X, r)
-            , Math.Round(Y, r)
-           , Math.Round(Z, r));
+                X.Round(r),
+            Y.Round(r),
+            Z.Round(r));
         }
 
 

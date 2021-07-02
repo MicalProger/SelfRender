@@ -7,14 +7,13 @@ namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class Ray3D
     {
-        public double L => 1 - Math.Sqrt(Math.Pow(Math.Cos(Direct.YRotation.ToRadians()), 2) 
-                                         + Math.Pow(Math.Cos(Direct.ZRotation.ToRadians()), 2)) / Math.Sqrt(2);
         
-        public double M => 1 - Math.Sqrt(Math.Pow(Math.Cos(Direct.XRotation.ToRadians()), 2) 
-                                         + Math.Pow(Math.Cos(Direct.ZRotation.ToRadians()), 2)) / Math.Sqrt(2);
+        
+        public double L => 1 - Direct.YRotation.Cos() * Direct.ZRotation.Cos();
+        
+        public double M => 1 - Direct.XRotation.Cos() * Direct.ZRotation.Cos();
 
-        public double N => 1 - Math.Sqrt(Math.Pow(Math.Cos(Direct.YRotation.ToRadians()), 2)
-                                         + Math.Pow(Math.Cos(Direct.XRotation.ToRadians()), 2)) / Math.Sqrt(2);
+        public double N => 1 - Direct.YRotation.Cos() * Direct.ZRotation.Cos();
 
 
         public Point3 Target;
@@ -32,17 +31,17 @@ namespace SelfGraphics.GraphRT.Graphics3D
             MaxReflection = maxReflection;
         }
 
-        public Point3 GetPointByDist(double distance)
-        {
-            Point3 p = new Point3(Source.X, Source.Y, Source.Z);
-            Ray2D tmpRay = new Ray2D(new Point2(Source.X, Source.Y), Direct.XRotation);
-            var a = tmpRay.GetPixelByLen(distance);
-            p -= new Point3(a.X, a.Y);
-            tmpRay = new Ray2D(new Point2(Source.Y, Source.Z), Direct.YRotation);
-            a = tmpRay.GetPixelByLen(distance);
-            p -= new Point3(0, 0, a.Y);
-            return p;
-        }
+        // public Point3 GetPointByDist(double distance)
+        // {
+        //     Point3 p = new Point3(Source.X, Source.Y, Source.Z);
+        //     Ray2D tmpRay = new Ray2D(new Point2(Source.X, Source.Y), Direct.XRotation);
+        //     var a = tmpRay.GetPixelByLen(distance);
+        //     p -= new Point3(a.X, a.Y);
+        //     tmpRay = new Ray2D(new Point2(Source.Y, Source.Z), Direct.YRotation);
+        //     a = tmpRay.GetPixelByLen(distance);
+        //     p -= new Point3(0, 0, a.Y);
+        //     return p;
+        // }
         
         public Point3 GetEndpoint(Scence space)
         {
