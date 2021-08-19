@@ -7,14 +7,6 @@ namespace SelfGraphics.GraphRT.Graphics3D
 {
     public class Ray3D
     {
-        
-        
-        public double L => 1 - Direct.YRotation.Cos() * Direct.ZRotation.Cos();
-        
-        public double M => 1 - Direct.XRotation.Cos() * Direct.ZRotation.Cos();
-
-        public double N => 1 - Direct.YRotation.Cos() * Direct.ZRotation.Cos();
-
 
         public Point3 Target;
 

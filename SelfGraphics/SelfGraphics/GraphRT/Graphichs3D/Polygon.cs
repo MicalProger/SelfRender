@@ -32,9 +32,9 @@ namespace SelfGraphics.GraphRT.Graphics3D
             a = (decimal) Normal.X;
             b = (decimal) Normal.Y;
             c = (decimal) Normal.Z;
-            d = (decimal) ray.L;
-            f = (decimal) ray.M;
-            h = (decimal) ray.N;
+            d = (decimal) ray.Direct.L;
+            f = (decimal) ray.Direct.M;
+            h = (decimal) ray.Direct.N;
             e = (decimal) ray.Source.X;
             g = (decimal) ray.Source.Y;
             j = (decimal) ray.Source.Z;
@@ -57,8 +57,6 @@ namespace SelfGraphics.GraphRT.Graphics3D
             fin.Y = (double) (f * t + g);
             fin.Z = (double) (h * t + j);
             fin.Color = this.Color;
-            // if (!ray.GetPointByDist(fin.GetDistanceTo(ray.Source)).Rounded().Equals(fin.Rounded()))
-            //     return null;
             if (Normal.Z != 0)
             {
                 if (!Tools.IsInPolygon(vertexs.Select(p => new Point2(p.X, p.Y)).ToArray(), new Point2(fin.X, fin.Y)))

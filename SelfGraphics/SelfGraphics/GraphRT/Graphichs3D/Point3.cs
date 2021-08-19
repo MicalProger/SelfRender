@@ -1,26 +1,67 @@
 using SelfGraphics.LowGraphics;
 using System;
+using System.Diagnostics;
 using System.Globalization;
+using SelfGraphics.GraphRT.Graphics2D;
 using SFML.Graphics;
 
 namespace SelfGraphics.GraphRT.Graphics3D
 {
+    public enum Axis
+    {
+        X = 1,
+        Y = 2,
+        Z = 3
+    }
+
     public class Point3
     {
         public double Distance;
 
         public Color Color;
-        
+
+        public void SetRotate(Axis axis, double angle)
+        {
+            Point2 flatVector;
+            double flatLen;
+            switch (axis)
+            {
+                case Axis.X:
+                    flatLen = Point2.Zero.GetLenTo(new Point2(Y, Z));
+                    flatVector = new Ray2D(Point2.Zero, angle).GetPixelByLen(flatLen);
+                    Y = -flatVector.X;
+                    Z = -flatVector.Y;
+                    break;
+                case Axis.Y:
+                    flatLen = Point2.Zero.GetLenTo(new Point2(X, Z));
+                    flatVector = new Ray2D(Point2.Zero, angle).GetPixelByLen(flatLen);
+
+                    X = -flatVector.X;
+                    Z = -flatVector.Y;
+                    break;
+                case Axis.Z:
+                    flatLen = Point2.Zero.GetLenTo(new Point2(X, Y));
+                    flatVector = new Ray2D(Point2.Zero, angle).GetPixelByLen(flatLen);
+                    X = -flatVector.X;
+                    Y = -flatVector.Y;
+                    break;
+            }
+        }
+
+        public Point2 GetPoint2()
+        {
+            return new(X, Y) { Color = Color };
+        }
+
         public void SetDistanceTo(Point3 p)
         {
             Point3 d = (this - p).Absoluted();
-            var s1 = Math.Sqrt(Math.Pow(d.X, 2) + Math.Pow(d.Y, 2));
-            Distance = Math.Sqrt(Math.Pow(s1, 2) + Math.Pow(d.Z, 2));
+            var s1 = Math.Sqrt(Math.Pow(d.X, 2) + Math.Pow(d.Y, 2) + Math.Pow(d.Z, 2));
         }
 
         public Direction GetDirectionTo(Point3 p)
         {
-            Direction dir = new Direction(0, 0,0);
+            Direction dir = new Direction(0, 0, 0);
             var x = Tools.GetAngle(new(X, Y), new(p.X, p.Y));
             var y = Tools.GetAngle(new(Y, Z), new(p.Y, p.Z));
             dir.XRotation = x;
@@ -30,12 +71,7 @@ namespace SelfGraphics.GraphRT.Graphics3D
 
         public double GetDistanceTo(Point3 p)
         {
-            if (Distance == 0)
-            {
-                Point3 d = (this - p).Absoluted();
-                var s1 = Math.Sqrt(Math.Pow(d.X, 2) + Math.Pow(d.Y, 2));
-                Distance = Math.Sqrt(Math.Pow(s1, 2) + Math.Pow(d.Z, 2));
-            }
+            SetDistanceTo(p);
             return Distance;
         }
 
@@ -63,10 +99,9 @@ namespace SelfGraphics.GraphRT.Graphics3D
         {
             return new Point3(
                 X.Round(r),
-            Y.Round(r),
-            Z.Round(r));
+                Y.Round(r),
+                Z.Round(r));
         }
-
 
 
         public override bool Equals(object obj)
@@ -100,7 +135,6 @@ namespace SelfGraphics.GraphRT.Graphics3D
             X = Convert.ToDouble(asixs[0], CultureInfo.InvariantCulture);
             Y = Convert.ToDouble(asixs[1], CultureInfo.InvariantCulture);
             Z = Convert.ToDouble(asixs[2], CultureInfo.InvariantCulture);
-
         }
 
         public Point3(double x, double y)
@@ -108,6 +142,7 @@ namespace SelfGraphics.GraphRT.Graphics3D
             X = x;
             Y = y;
         }
+
         public Point3(double xyz)
         {
             X = xyz;
@@ -120,6 +155,5 @@ namespace SelfGraphics.GraphRT.Graphics3D
         public double Y;
 
         public double Z;
-
     }
 }

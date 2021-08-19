@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SelfGraphics.LowGraphics
+namespace Self2D
 {
     static class Tools
     {
