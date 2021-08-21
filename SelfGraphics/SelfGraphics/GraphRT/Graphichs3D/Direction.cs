@@ -48,9 +48,9 @@ namespace SelfGraphics.GraphRT.Graphics3D
 
         public double L => vector.X;
 
-        public double M => vector.Z;
+        public double M => vector.Y;
 
-        public double N => vector.Y;
+        public double N => vector.Z;
 
         public override string ToString()
         {

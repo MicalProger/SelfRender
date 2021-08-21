@@ -46,6 +46,7 @@ namespace SelfGraphics.GraphRT.Graphics3D
                     Y = -flatVector.Y;
                     break;
             }
+            Console.WriteLine(this.ToString());
         }
 
         public Point2 GetPoint2()
@@ -129,12 +130,12 @@ namespace SelfGraphics.GraphRT.Graphics3D
             Z = z;
         }
 
-        public Point3(string xyz)
+        public Point3(string xzy)
         {
-            var asixs = xyz.Split(' ');
+            var asixs = xzy.Split(' ');
             X = Convert.ToDouble(asixs[0], CultureInfo.InvariantCulture);
-            Y = Convert.ToDouble(asixs[1], CultureInfo.InvariantCulture);
-            Z = Convert.ToDouble(asixs[2], CultureInfo.InvariantCulture);
+            Z = Convert.ToDouble(asixs[1], CultureInfo.InvariantCulture);
+            Y = Convert.ToDouble(asixs[2], CultureInfo.InvariantCulture);
         }
 
         public Point3(double x, double y)

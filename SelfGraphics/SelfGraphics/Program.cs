@@ -31,12 +31,12 @@ namespace SelfGraphics
             //     }
             //     _render.Display();
             // }
-            Direction dir = new Direction(10, 0, 0);
+            Direction dir = new Direction(5, 10, 0);
             for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine(i);
                 Console.WriteLine(dir.ToString());
-                dir.Add(0,  10, 0);
+                dir.Add(0,  0, 10);
             }
         }
     }
