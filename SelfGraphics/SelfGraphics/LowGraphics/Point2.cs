@@ -24,6 +24,15 @@ namespace SelfGraphics.LowGraphics
 
         public double Len;
 
+        public void ChangeToLen(double newLen=1)
+        {
+            var localLen = GetLenTo(Point2.Zero);
+            var k = newLen / localLen;
+            X *= k;
+            Y *= k;
+            localLen = GetLenTo(Point2.Zero);
+        }
+        
         public override bool Equals(object? obj)
         {
             var eqPos = obj as Point2;
@@ -65,6 +74,11 @@ namespace SelfGraphics.LowGraphics
             return new Point2(p1.X - p2.X, p1.Y - p2.Y);
         }
 
+        public static Point2 operator *(Point2 p, double n)
+        {
+            return new Point2(p.X * n, p.Y * n);
+        }
+        
         public Point2 Copy()
         {
             return new Point2(X, Y) { Len = this.Len };

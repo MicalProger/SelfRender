@@ -55,6 +55,10 @@ namespace SelfGraphics.LowGraphics
             }
         }
 
+        protected Grid()
+        {
+        }
+
         public void Clear()
         {
             layers = new List<List<Prim>>() {new List<Prim>(), new List<Prim>()};
